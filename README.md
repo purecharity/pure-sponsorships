@@ -13,7 +13,7 @@ It depends on the Pure Charity Base Plugin being installed and it's credentials 
 
 ## Installation
 
-1. Upload the `purecharity-wp-sponsorships/trunk` folder contents to the `/wp-content/plugins/purecharity-wp-sponsorships` directory
+1. Copy the `/purecharity-wp-sponsorships` folder to the `/wp-content/plugins` on your WP install
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. You're done!
 
