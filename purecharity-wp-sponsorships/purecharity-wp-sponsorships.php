@@ -105,7 +105,6 @@ function purecharity_wp_sponsorships_updater() {
       'slug' => plugin_basename( __FILE__ ),
       'proper_folder_name' => 'purecharity-wp-sponsorships',
       'api_url' => 'https://api.github.com/repos/purecharity/pure-sponsorships',
-      'raw_url' => 'https://raw.github.com/purecharity/pure-sponsorships/master',
       'raw_url' => 'https://raw.githubusercontent.com/purecharity/pure-sponsorships/master/purecharity-wp-sponsorships/',
       'github_url' => 'https://github.com/purecharity/pure-sponsorships',
       'zip_url' => 'https://github.com/purecharity/pure-sponsorships/archive/master.zip',
