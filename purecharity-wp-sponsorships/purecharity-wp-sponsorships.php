@@ -16,7 +16,7 @@
  * Plugin Name:       Pure Charity Sponsorships
  * Plugin URI:        http://purecharity.com/
  * Description:       Plugin to display a list of or a single sponsorship program from the Pure Charity app.
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            Rafael Dalprá / Pure Charity
  * Author URI:        http://purecharity.com/
  * License:           GPL-2.0+
@@ -89,4 +89,32 @@ function ss_force_template() {
 	$options = get_option( 'purecharity_sponsorships_settings' );
   include(get_template_directory() . '/' . $options['single_view_template']);
   exit;
+}
+
+/*
+ * Plugin updater using GitHub
+ *
+ * Auto Updates through GitHub
+ *
+ * @since   1.1.2
+ */
+add_action( 'init', 'purecharity_wp_sponsorships_updater' );
+function purecharity_wp_sponsorships_updater() {
+  if ( is_admin() ) { 
+    $sp_config = array(
+      'slug' => plugin_basename( __FILE__ ),
+      'proper_folder_name' => 'purecharity-wp-sponsorships',
+      'api_url' => 'https://api.github.com/repos/purecharity/pure-sponsorships',
+      'raw_url' => 'https://raw.github.com/purecharity/pure-sponsorships/master',
+      'raw_url' => 'https://raw.githubusercontent.com/purecharity/pure-sponsorships/master/purecharity-wp-sponsorships/',
+      'github_url' => 'https://github.com/purecharity/pure-sponsorships',
+      'zip_url' => 'https://github.com/purecharity/pure-sponsorships/archive/master.zip',
+      'sslverify' => true,
+      'requires' => '3.0',
+      'tested' => '3.3',
+      'readme' => 'README.md',
+      'access_token' => '',
+    );
+    new WP_GitHub_Updater( $sp_config );
+  }
 }
