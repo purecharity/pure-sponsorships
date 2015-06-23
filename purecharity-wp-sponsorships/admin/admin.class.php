@@ -150,12 +150,6 @@ class Purecharity_Wp_Sponsorships_Admin {
 			array('Purecharity_Wp_Sponsorships_Admin', 'location_filter_render'), 
 			'psPluginPage', 'purecharity_sponsorships_display_psPluginPage_section' 
 		);
-
-		add_settings_field( 
-			'iframe_sponsor', __( 'Enable Iframe Sponsor', 'wordpress' ), 
-			array('Purecharity_Wp_Sponsorships_Admin', 'iframe_sponsor_render'), 
-			'psPluginPage', 'purecharity_sponsorships_display_psPluginPage_section' 
-		);
 	}
 
 
@@ -173,22 +167,6 @@ class Purecharity_Wp_Sponsorships_Admin {
 				<option <?php echo $template == @$options['single_view_template'] ? 'selected' : '' ?>><?php echo $template ?></option>
 			<?php } ?>
 		</select>
-		<?php
-	}
-
-	/**
-	 * Renders the live filter.
-	 *
-	 * @since    1.0.1
-	 */
-	public static function iframe_sponsor_render(  ) { 
-		$options = get_option( 'purecharity_sponsorships_settings' );
-		?>
-		<input 
-			type="checkbox" 
-			name="purecharity_sponsorships_settings[iframe_sponsor]" 
-			<?php echo (isset($options['iframe_sponsor'])) ? 'checked' : '' ?>
-			value="true">
 		<?php
 	}
 
