@@ -352,10 +352,8 @@ class Purecharity_Wp_Sponsorships_Public {
 	public static function render_sponsor_options(){
 
 		$options = get_option( 'purecharity_sponsorships_settings' );
-		$form_class = isset($options['iframe_sponsor']) ? 'iframe-form' : '';
 
-		$html = Purecharity_Wp_Base_Public::iframe_actions() ;
-		$html .= '<form method="get" action="https://purecharity.com/sponsorships/'. self::$sponsorship->id .'/fund" class="pcsponsor-fund-form '.$form_class.'">';
+		$html = '<form method="get" action="https://purecharity.com/sponsorships/'. self::$sponsorship->id .'/fund" class="pcsponsor-fund-formifgra">';
 		$html .= '<select id="sponsorship_supporter_shares" name="amount">';
 		$html .= '<option>Select Sponsorship Level</option>';
 		for ($i = 1 ; $i <= self::$sponsorship->number_available ; $i++) {
