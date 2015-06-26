@@ -32,7 +32,7 @@ Possible parameters:
 * `child_id` - The amount of records to fetch per page
 
 ### Sponsorship Program
-`[sponsorship id=X]`
+`[sponsorship program_id=X]`
 
 Possible parameters:
-* `id` - The sponsorship program id
+* `program_id` - The sponsorship program id
