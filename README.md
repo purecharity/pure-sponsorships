@@ -29,10 +29,5 @@ Possible parameters:
 `[sponsorship_child]`
 
 Possible parameters:
+
 * `child_id` - The amount of records to fetch per page
-
-### Sponsorship Program
-`[sponsorship program_id=X]`
-
-Possible parameters:
-* `program_id` - The sponsorship program id

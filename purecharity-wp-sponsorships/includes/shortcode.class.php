@@ -175,25 +175,4 @@ class Purecharity_Wp_Sponsorships_Shortcode {
       return Purecharity_Wp_Sponsorships_Public::single();
     }
   }
-
-  /**
-   * Sponsorships single view shortcode.
-   *
-   * @since    1.0.0
-   */
-  public static function sponsorship_shortcode($atts)
-  {
-    $options = shortcode_atts( array(
-      'id' => false
-    ), $atts );
-
-    if ($options['id']) {
-      $sponsorship = self::$base_plugin->api_call('sponsorships/'. $options['id']);
-      $sponsorship = $sponsorship->sponsorship;
-
-      Pure_Sponsorships_Display::$sponsorship = $sponsorship;
-
-      return Pure_Sponsorships_Display::single();
-    }
-  }
 }
