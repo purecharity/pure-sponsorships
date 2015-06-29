@@ -24,6 +24,7 @@ It depends on the Pure Charity Base Plugin being installed and it's credentials 
 
 Possible parameters:
 * `per_page` - The amount of records to fetch per page
+* `program_id` - The program id
 
 ### Single Child
 `[sponsorship_child]`
