@@ -22,17 +22,6 @@
  */
 class Purecharity_Wp_Sponsorships_Public {
 
-		// <style>
-		// 	.single-sponsorship .ps-taken,
-		// 	.single-sponsorship .simpleselect .placeholder,
-		// 	.single-sponsorship .styledButton 
-		// 		{ background: '. get_option('puresponsorships_maincolor', false) .'; }
-		// 	.single-sponsorship a 
-		// 		{ color: '. get_option('puresponsorships_maincolor', false) .'; }
-		// 	 '. get_option('puresponsorships_additionalstyles', false) .'				
-		// </style>
-
-
 	/**
 	 * The sponsorship.
 	 *
@@ -103,7 +92,7 @@ class Purecharity_Wp_Sponsorships_Public {
 
 
 		wp_enqueue_style( 'pure-sponsorships-selects', plugin_dir_url( __FILE__ ) . 'css/jquery.simpleselect.css');
-		
+
 		$options = get_option( 'purecharity_sponsorships_settings' );
 		// Allow the user to select a stylesheet theme
 		if(isset($options['plugin_style'])){
@@ -150,9 +139,11 @@ class Purecharity_Wp_Sponsorships_Public {
 		$html .= '</div>';
 
 		foreach(self::$sponsorships->sponsorships as $sponsorship){
-			$total_available = $sponsorship->number_available + $sponsorship->quantity_taken;
+			$total_available = $sponsorship->sponsors_goal;
+			$available = $sponsorship->number_available;
+			if((int)$available < 0){ $available = 0; }
 
-			$html .= '		
+			$html .= '
 				<div class="pcsponsor-item sponsorship_'.$sponsorship->id.'">
 					<a href="?child_id='.$sponsorship->id.'">
 						<div class="pcsponsor-image" style="background-image: url('.$sponsorship->images->small.');">
@@ -164,8 +155,8 @@ class Purecharity_Wp_Sponsorships_Public {
 								'.self::the_bullets($sponsorship).'
 							</ul>
 							<p class="pcsponsor-status">
-								'.$sponsorship->number_available.' of '.$total_available.' 
-								'.pluralize($total_available, 'Sponsorship').' 
+								'.$available.' of '.$total_available.'
+								'.pluralize($total_available, 'Sponsorship').'
 								Available
 							</p>
 						</div>
@@ -178,9 +169,9 @@ class Purecharity_Wp_Sponsorships_Public {
     $html .= Purecharity_Wp_Sponsorships_Paginator::page_links(self::$sponsorships->meta);
 		$options = get_option( 'purecharity_sponsorships_settings' );
     if(!isset($options['hide_powered_by'])){
-    	$html .= Purecharity_Wp_Base_Public::powered_by();	
+    	$html .= Purecharity_Wp_Base_Public::powered_by();
     }
-		
+
 
 		return $html;
 	}
@@ -250,10 +241,13 @@ class Purecharity_Wp_Sponsorships_Public {
 	 * @since    1.0.0
 	 */
 	public static function the_bullets($sponsorship){
-		$total_available = $sponsorship->number_available + $sponsorship->quantity_taken;
+		$total_available = $sponsorship->sponsors_goal;
+		$taken = $sponsorship->quantity_taken;
+		if((int)$taken > (int)$total_available){ $taken = $total_available; }
+
 		$html = '';
 		for ($i = 1; $i <= $total_available; $i++) {
-			$klass = ($i <= $sponsorship->quantity_taken) ? 'pcsponsor-taken' : '';
+			$klass = ($i <= $taken) ? 'pcsponsor-taken' : '';
 	   	$html .= '<li class="'. $klass .'"></li>';
 		}
 		return $html;
@@ -288,12 +282,12 @@ class Purecharity_Wp_Sponsorships_Public {
 				.single-sponsorship .ps-taken,
 				.single-sponsorship .simpleselect .placeholder,
 				.single-sponsorship .styledButton ,
-				.pure-button { background: '. $color .' !important; color: #FFF; } 
-				.pcsponsor-content p, 
-				.pcsponsor-content h4, 
-				.pcsponsorships-return a, 
-				.single-sponsorship a { color: '. $color .' !important; }				
-			</style> 
+				.pure-button { background: '. $color .' !important; color: #FFF; }
+				.pcsponsor-content p,
+				.pcsponsor-content h4,
+				.pcsponsorships-return a,
+				.single-sponsorship a { color: '. $color .' !important; }
+			</style>
 		';
 
 		return $scripts;
@@ -307,7 +301,9 @@ class Purecharity_Wp_Sponsorships_Public {
 	 */
 	public static function single(){
 		$options = get_option( 'purecharity_sponsorships_settings' );
-		$total_available = self::$sponsorship->number_available + self::$sponsorship->quantity_taken;
+		$total_available = self::$sponsorship->sponsors_goal;
+		$available = self::$sponsorship->number_available;
+		if((int)$available < 0){ $available = 0; }
 		$html = self::custom_css();
 
 		$html .= '
@@ -324,8 +320,8 @@ class Purecharity_Wp_Sponsorships_Public {
 							'.self::the_bullets(self::$sponsorship).'
 						</ul>
 						<p class="pcsponsor-single-status">
-							'.self::$sponsorship->number_available.' of '.$total_available.' 
-							'.pluralize($total_available, 'Sponsorship').' 
+							'.$available.' of '.$total_available.'
+							'.pluralize($total_available, 'Sponsorship').'
 							Available
 						</p>
 					</div>
@@ -338,8 +334,8 @@ class Purecharity_Wp_Sponsorships_Public {
 				</div>
 		';
 
-    	$html .= Purecharity_Wp_Base_Public::powered_by();	
-    
+    	$html .= Purecharity_Wp_Base_Public::powered_by();
+
 	return $html;
 	}
 
