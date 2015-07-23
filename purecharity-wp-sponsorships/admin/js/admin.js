@@ -73,8 +73,6 @@ $(document).ready(function(){
 
     $.ajax({
       type: 'GET',
-      // dataType: 'jsonp',
-      xhrFields: { withCredentials: true },
       url: $(this).parent().attr('data-api-url')+slug,
       success: function(data){
 	      parsed_data = JSON.parse(data.custom_fields);
@@ -84,8 +82,6 @@ $(document).ready(function(){
 					if(field_exists(key)){
 						existing_fields.push(key);
 					}else{
-						// console.log(key)
-						// console.log(parsed_data[key])
 						new_example_custom_field(key, parsed_data[key]);
 					}
 				});

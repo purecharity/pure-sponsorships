@@ -158,11 +158,10 @@ class Purecharity_Wp_Sponsorships_Public {
 		}
 
 		$html .= '</div>';
-  $html .= Purecharity_Wp_Sponsorships_Paginator::page_links(self::$sponsorships->meta);
-  if(!isset($options['hide_powered_by'])){
+	  $html .= Purecharity_Wp_Sponsorships_Paginator::page_links(self::$sponsorships->meta);
+	  if(!isset($options['hide_powered_by'])){
   	$html .= Purecharity_Wp_Base_Public::powered_by();
   }
-
 
 		return $html;
 	}
@@ -255,10 +254,13 @@ class Purecharity_Wp_Sponsorships_Public {
 	 * @since    1.0.0
 	 */
 	public static function the_bullets($sponsorship){
-		$total_available = $sponsorship->number_available + $sponsorship->quantity_taken;
+		$total_available = $sponsorship->sponsors_goal;
+		$taken = $sponsorship->quantity_taken;
+		if((int)$taken > (int)$total_available){ $taken = $total_available; }
+
 		$html = '';
 		for ($i = 1; $i <= $total_available; $i++) {
-			$klass = ($i <= $sponsorship->quantity_taken) ? 'pcsponsor-taken' : '';
+			$klass = ($i <= $taken) ? 'pcsponsor-taken' : '';
 	   	$html .= '<li class="'. $klass .'"></li>';
 		}
 		return $html;
@@ -315,7 +317,9 @@ class Purecharity_Wp_Sponsorships_Public {
 	 */
 	public static function single(){
 		$options = get_option( 'purecharity_sponsorships_settings' );
-		$total_available = self::$sponsorship->number_available + self::$sponsorship->quantity_taken;
+		$total_available = self::$sponsorship->sponsors_goal;
+		$available = self::$sponsorship->number_available;
+		if((int)$available < 0){ $available = 0; }
 		$html = self::custom_css();
 
 		if(isset($options['plugin_style'])){
@@ -360,6 +364,20 @@ class Purecharity_Wp_Sponsorships_Public {
 							<a href="#"> > </a>
 						</div>
 
+				<div class="pcsponsor-single-image">
+					<img src="'.self::$sponsorship->images->small.'" alt="'.self::$sponsorship->name.'"/>
+				</div>
+				<div class="pcsponsor-single-content">
+					<div class="pcsponsor-single-info">
+						<h4>'.self::$sponsorship->name.'</h4>
+						<ul class="pcsponsor-status-buttons pcsponsor-single-status-buttons">
+							'.self::the_bullets(self::$sponsorship).'
+						</ul>
+						<p class="pcsponsor-single-status">
+							'.$available.' of '.$total_available.'
+							'.pluralize($total_available, 'Sponsorship').'
+							Available
+						</p>
 					</div>
 
 				</div>
