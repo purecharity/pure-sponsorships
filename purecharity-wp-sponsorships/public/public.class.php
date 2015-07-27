@@ -322,7 +322,7 @@ class Purecharity_Wp_Sponsorships_Public {
 		if((int)$available < 0){ $available = 0; }
 		$html = self::custom_css();
 
-		if(isset($options['plugin_style'])){
+		if(isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3'){
 			$custom_fields =
 			$html .= '
 				<div class="pcs-rounded">
@@ -363,27 +363,11 @@ class Purecharity_Wp_Sponsorships_Public {
 						<div class="control right">
 							<a href="#"> > </a>
 						</div>
-
-				<div class="pcsponsor-single-image">
-					<img src="'.self::$sponsorship->images->small.'" alt="'.self::$sponsorship->name.'"/>
-				</div>
-				<div class="pcsponsor-single-content">
-					<div class="pcsponsor-single-info">
-						<h4>'.self::$sponsorship->name.'</h4>
-						<ul class="pcsponsor-status-buttons pcsponsor-single-status-buttons">
-							'.self::the_bullets(self::$sponsorship).'
-						</ul>
-						<p class="pcsponsor-single-status">
-							'.$available.' of '.$total_available.'
-							'.pluralize($total_available, 'Sponsorship').'
-							Available
-						</p>
 					</div>
-
 				</div>
+
 				<div class="pcs-navigation">
-					<a href="#" class="back"><span> < </span> Back to all kids</a>
-					<a href="#" class="learn-more">Learn more about sponsorships <span> > </span></a>
+					'.self::lower_links().'
 				</div>
 			';
 
@@ -422,6 +406,25 @@ class Purecharity_Wp_Sponsorships_Public {
 		return $html;
 	}
 
+
+	/**
+	 * Renders the lower links for the single kid view when using layout option 3.
+	 *
+	 * @since    1.1
+	 */
+	public static function lower_links(){
+		$options = get_option( 'purecharity_sponsorships_settings' );
+
+		$html = '';
+		if(isset($options['back_link'])){
+			$html .= '<a href="#" class="back"><span> < </span> Back to all kids</a>';
+		}
+		if(isset($options['more_link'])){
+			$html .= '<a href="#" class="learn-more">Learn more about sponsorships <span> > </span></a>';
+		}
+
+		return $html;
+	}
 
 	/**
 	 * Renders the custom fields for the single kid view.

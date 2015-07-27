@@ -156,6 +156,25 @@ class Purecharity_Wp_Sponsorships_Admin {
 			array('Purecharity_Wp_Sponsorships_Admin', 'allowed_custom_fields_render'),
 			'psPluginPage', 'purecharity_sponsorships_display_psPluginPage_section'
 		);
+
+		add_settings_section(
+			'purecharity_sponsorships_3_psPluginPage_section',
+			__( 'Display settings', 'wordpress' ),
+			array('Purecharity_Wp_Sponsorships_Admin', 'third_option_settings_section_callback'),
+			'psPluginPage'
+		);
+
+		add_settings_field(
+			'back_link', __( 'Display Back Link', 'wordpress' ),
+			array('Purecharity_Wp_Sponsorships_Admin', 'back_link_render'),
+			'psPluginPage', 'purecharity_sponsorships_3_psPluginPage_section'
+		);
+
+		add_settings_field(
+			'more_link', __( 'Display More Info Link', 'wordpress' ),
+			array('Purecharity_Wp_Sponsorships_Admin', 'more_link_render'),
+			'psPluginPage', 'purecharity_sponsorships_3_psPluginPage_section'
+		);
 	}
 
 
@@ -276,7 +295,7 @@ class Purecharity_Wp_Sponsorships_Admin {
 			value="true">
 		<?php
 	}
-
+	
 	/**
 	 * Renders the gender filter.
 	 *
@@ -289,6 +308,40 @@ class Purecharity_Wp_Sponsorships_Admin {
 			type="checkbox"
 			name="purecharity_sponsorships_settings[gender_filter]"
 			<?php echo (isset($options['gender_filter'])) ? 'checked' : '' ?>
+			value="true">
+		<?php
+	}
+
+	/**
+	 * Renders the back link.
+	 *
+	 * @since    1.1
+	 */
+	public static function back_link_render(  ) {
+		$options = get_option( 'purecharity_sponsorships_settings' );
+		?>
+		<input
+			type="checkbox"
+			name="purecharity_sponsorships_settings[back_link]"
+			<?php echo $options['plugin_style'] == 'pure-sponsorships-option3' ? '' : 'disabled' ?>
+			<?php echo (isset($options['back_link'])) ? 'checked' : '' ?>
+			value="true">
+		<?php
+	}
+
+	/**
+	 * Renders the more info link.
+	 *
+	 * @since    1.1
+	 */
+	public static function more_link_render(  ) {
+		$options = get_option( 'purecharity_sponsorships_settings' );
+		?>
+		<input
+			type="checkbox"
+			name="purecharity_sponsorships_settings[more_link]"
+			<?php echo $options['plugin_style'] == 'pure-sponsorships-option3' ? '' : 'disabled' ?>
+			<?php echo (isset($options['more_link'])) ? 'checked' : '' ?>
 			value="true">
 		<?php
 	}
@@ -391,6 +444,16 @@ class Purecharity_Wp_Sponsorships_Admin {
 	public static function display_settings_section_callback(  )
 	{
 		echo __( 'Display settings for the sponsorships plugin.', 'wordpress' );
+	}
+
+	/**
+	 * Callback for use with Settings API.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function third_option_settings_section_callback(  )
+	{
+		echo __( 'Display settings for the sponsorships plugin. * Only available when using the third layout option.', 'wordpress' );
 	}
 
 
