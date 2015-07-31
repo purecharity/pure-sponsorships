@@ -142,7 +142,7 @@ class Purecharity_Wp_Sponsorships_Shortcode {
         $filters .= '&limit='. (int) $limit;
       }
 
-      // Grab the sponsorships 
+      // Grab the sponsorships
       $sponsorships = self::$base_plugin->api_call('sponsorships?sponsorship_program_id='. $sponsorship_id . $filters);
       $sponsorships_full = self::$base_plugin->api_call('sponsorships?sponsorship_program_id='. $sponsorship_id . $full_filters);
 

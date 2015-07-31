@@ -79,9 +79,9 @@ class Purecharity_Wp_Sponsorships {
 		// Initialize the shortcodes
 		Purecharity_Wp_Sponsorships_Shortcode::init();
 
-		// Don't run anything else in the plugin, if the base plugin is not available or 
+		// Don't run anything else in the plugin, if the base plugin is not available or
 		// not active
-    	if ( ! self::base_present() ) { return; }
+  	if ( ! self::base_present() ) { return; }
 
 	}
 
@@ -94,7 +94,7 @@ class Purecharity_Wp_Sponsorships {
 	 */
   	static function base_present() {
 		return in_array( 'purecharity-wp-base/purecharity-wp-base.php', (array) get_option( 'active_plugins', array() ) );
-  	}	
+  	}
 
 	/**
 	 * Disable plugin if base plugin is not present or not active.
@@ -108,10 +108,10 @@ class Purecharity_Wp_Sponsorships {
 	    if ( ! self::base_present() ) {
 	      	deactivate_plugins( plugin_basename( plugin_basename( __FILE__ ) ) );
 	      	wp_die(
-	      		__( 
-			      	'Pure Charity Sponsorships requires Pure Charity Base to be installed and active!', 
-			      	'purecharity-wp-sponsorships' 
-		      	) 
+	      		__(
+			      	'Pure Charity Sponsorships requires Pure Charity Base to be installed and active!',
+			      	'purecharity-wp-sponsorships'
+		      	)
 		    );
 	    }
   	}
@@ -243,7 +243,10 @@ class Purecharity_Wp_Sponsorships {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		
+
+		add_filter('query_vars', array($this, 'add_query_vars'), 0);
+		add_action('parse_request', array($this, 'sniff_requests'), 0);
+
 		$options = get_option( 'purecharity_sponsorships_settings' );
 
 		if(isset($_GET['child_id']) && isset($options['single_view_template']) && $options['single_view_template'] != ''){
@@ -290,6 +293,70 @@ class Purecharity_Wp_Sponsorships {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Adds query vars for the sponsorship example api
+	 *
+	 * @since    1.1
+	 */
+	public function add_query_vars($vars){
+		$vars[] = '__api';
+		$vars[] = 'sponsorship_slug';
+		return $vars;
+	}
+
+	/**
+	 * Sniff requests to send to the right place.
+	 *
+	 * @since    1.1
+	 */
+	public function sniff_requests(){
+		global $wp;
+		if(isset($wp->query_vars['__api'])){
+			$this->handle_request();
+			exit;
+		}
+	}
+
+	/**
+	 * Handles the API requests for the example sponsorships
+	 *
+	 * @since    1.1
+	 */
+	protected function handle_request(){
+		global $wp;
+		$sponsorship_slug = $wp->query_vars['sponsorship_slug'];
+		if(!$sponsorship_slug)
+			$this->send_response('Please tell what sponsorship to send.');
+
+		// API CALL
+		$base_plugin = new Purecharity_Wp_Base();
+		$sponsorships = $base_plugin->api_call('sponsorships?sponsorship_program_id='. $sponsorship_slug );
+
+		$custom_fields = Array();
+		foreach($sponsorships->sponsorships[0]->custom_fields as $key => $value){
+			$custom_fields[$key] = implode(' ', preg_split('/(?=[A-Z])/',$key));
+		}
+
+		if($sponsorships)
+			$this->send_response('200 OK', json_encode($custom_fields));
+		else
+			$this->send_response('Something went wrong');
+	}
+
+	/**
+	 * Handles the JSON response
+	 *
+	 * @since    1.1
+	 */
+	protected function send_response($msg, $custom_fields = ''){
+		$response['message'] = $msg;
+		if($custom_fields)
+			$response['custom_fields'] = $custom_fields;
+			header('content-type: application/json; charset=utf-8');
+	    echo json_encode($response)."\n";
+	    exit;
 	}
 
 }

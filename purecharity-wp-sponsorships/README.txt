@@ -30,6 +30,9 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 1.1 =
+* Added alternative rounded layout.
+
 = 1.0.6 =
 * Updated the sponsorships goal calculation.
 
