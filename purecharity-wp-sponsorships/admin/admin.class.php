@@ -295,7 +295,7 @@ class Purecharity_Wp_Sponsorships_Admin {
 			value="true">
 		<?php
 	}
-	
+
 	/**
 	 * Renders the gender filter.
 	 *
@@ -405,7 +405,7 @@ class Purecharity_Wp_Sponsorships_Admin {
 				value="pure-sponsorships-option1"
 				<?php echo $options['plugin_style'] == 'pure-sponsorships-option1' ? 'checked' : '' ?>
 				/>
-			<label><img src="https://purecharity.com/wp-content/uploads/2014/09/basic.png" width="320"></label>
+			<label><img src="<?php echo plugins_url('purecharity-wp-sponsorships/admin/img/opt1.png'); ?>" width="320"></label>
 		<br />
 		<input 	type="radio"
 				style="float:left; margin: 57px 10px 0 0"
@@ -413,7 +413,7 @@ class Purecharity_Wp_Sponsorships_Admin {
 				value="pure-sponsorships-option2"
 				<?php echo $options['plugin_style'] == 'pure-sponsorships-option2' ? 'checked' : '' ?>
 				/>
-			<label><img src="https://purecharity.com/wp-content/uploads/2014/09/secondary.png" width="320"></label>
+			<label><img src="<?php echo plugins_url('purecharity-wp-sponsorships/admin/img/opt2.png'); ?>" width="320"></label>
 		<br />
 		<input 	type="radio"
 				style="float:left; margin: 57px 10px 0 0"
@@ -421,7 +421,7 @@ class Purecharity_Wp_Sponsorships_Admin {
 				value="pure-sponsorships-option3"
 				<?php echo $options['plugin_style'] == 'pure-sponsorships-option3' ? 'checked' : '' ?>
 				/>
-			<label><img src="https://purecharity.com/wp-content/uploads/2014/09/secondary.png" width="320"></label>
+			<label><img src="<?php echo plugins_url('purecharity-wp-sponsorships/admin/img/opt3.png'); ?>" width="320"></label>
 		<?php
 	}
 
