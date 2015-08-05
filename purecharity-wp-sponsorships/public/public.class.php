@@ -471,7 +471,7 @@ class Purecharity_Wp_Sponsorships_Public {
 
 		$html = '<form method="get" action="https://purecharity.com/sponsorships/'. self::$sponsorship->id .'/fund" class="pcsponsor-fund-form">';
 		$html .= '<select id="sponsorship_supporter_shares" name="amount">';
-		$html .= '<option>Sponsorship Level</option>';
+		$html .= '<option>Choose Sponsorship Level</option>';
 		for ($i = 1 ; $i <= self::$sponsorship->number_available ; $i++) {
 			$termName = 'Sponsorship';
 			if ($i > 1) {
