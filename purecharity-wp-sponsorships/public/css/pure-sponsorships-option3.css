@@ -106,7 +106,7 @@ ul.pcsponsor-single-status-buttons li {
 	margin-right: 5px;
 }
 .pcs-rounded .info .slots ul li.pcsponsor-taken { background: orange; }
-.pcs-rounded .info .slots span { float: left; margin-left: 15px; font-size: 20px; color: #666; }
+.pcs-rounded .info .slots span { float: left; margin-left: 15px; font-size: 20px; color: #666;margin-bottom: 10px; }
 
 .pcs-rounded .info h1 {
 	float: left;
