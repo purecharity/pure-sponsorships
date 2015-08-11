@@ -337,7 +337,7 @@ class Purecharity_Wp_Sponsorships_Public {
 							</span>
 						</div>
 						<h1>'.self::$sponsorship->name.'</h1>
-						<p>'. self::$sponsorship->description .'</p>
+						<p class="pure-desc">'. self::$sponsorship->description .'</p>
 						'.self::render_custom_fields().'
 					</div>
 

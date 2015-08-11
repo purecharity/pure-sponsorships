@@ -144,6 +144,10 @@ ul.pcsponsor-single-status-buttons li {
 	margin-right: 30px;
 	font-size: 14px;
 }
+.pcs-rounded .info p.pure-desc {
+	font-size: 20px;
+}
+
 .pcs-rounded .pictures .control {
 	width: 15%;
 	float:left;
