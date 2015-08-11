@@ -356,7 +356,9 @@ class Purecharity_Wp_Sponsorships_Public {
 								<li class="active"><a href="#picture-1"></a></li>
 								<li><a href="#picture-2"></a></li>
 							</ul>
+							<div class="pcsponsor-single-select pc-third-view">
 							'.self::render_sponsor_options().'
+							</div> 
 						</div>
 
 						<div class="control right">
