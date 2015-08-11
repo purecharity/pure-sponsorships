@@ -350,7 +350,7 @@ class Purecharity_Wp_Sponsorships_Public {
 
 						<div class="album">
 							<div class="rail">
-								<div class="picture" style="background-image: url('.self::$sponsorship->images->medium.');">
+								<div class="picture" style="background-image: url('.self::$sponsorship->images->small.');">
 								</div>
 							</div>
 							<ul class="controls">
