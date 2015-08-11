@@ -295,7 +295,7 @@ class Purecharity_Wp_Sponsorships_Public {
 				.single-sponsorship .simpleselect .placeholder,
 				.single-sponsorship .styledButton ,
 				.pcs-rounded .info .slots ul li.taken,
-				.pure-button { background: '. $color .' !important; color: #FFF; }
+				.pure-button { background: '. $color .' !important; color: #FFF !important; }
 				.pcsponsor-content p,
 				.pcsponsor-content h4,
 				.pcsponsorships-return a,
@@ -337,8 +337,7 @@ class Purecharity_Wp_Sponsorships_Public {
 							</span>
 						</div>
 						<h1>'.self::$sponsorship->name.'</h1>
-						<!--h3>3RD GRADE</h3-->
-						<p>'. self::$sponsorship->description .'</p>
+						<p class="pure-desc">'. self::$sponsorship->description .'</p>
 						'.self::render_custom_fields().'
 					</div>
 
@@ -350,14 +349,16 @@ class Purecharity_Wp_Sponsorships_Public {
 
 						<div class="album">
 							<div class="rail">
-								<div class="picture" style="background-image: url('.self::$sponsorship->images->medium.');">
+								<div class="picture" style="background-image: url('.self::$sponsorship->images->small.');">
 								</div>
 							</div>
 							<ul class="controls">
 								<li class="active"><a href="#picture-1"></a></li>
 								<li><a href="#picture-2"></a></li>
 							</ul>
+							<div class="pcsponsor-single-select pc-third-view">
 							'.self::render_sponsor_options().'
+							</div> 
 						</div>
 
 						<div class="control right">

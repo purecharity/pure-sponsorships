@@ -75,6 +75,16 @@ ul.pcsponsor-single-status-buttons li {
 	height: 30px;
 }
 
+.pcsponsor-single-select {
+	background: none;
+	padding: 0px;
+	text-align: center;
+}
+
+.pc-third-view .pcsponsor-fund-form select {
+	width: 100%;
+}
+
 
 @media only screen and (max-width: 421px) {
 
@@ -106,7 +116,7 @@ ul.pcsponsor-single-status-buttons li {
 	margin-right: 5px;
 }
 .pcs-rounded .info .slots ul li.pcsponsor-taken { background: orange; }
-.pcs-rounded .info .slots span { float: left; margin-left: 15px; font-size: 20px; color: #666; }
+.pcs-rounded .info .slots span { float: left; margin-left: 15px; font-size: 20px; color: #666;margin-bottom: 15px; }
 
 .pcs-rounded .info h1 {
 	float: left;
@@ -144,6 +154,10 @@ ul.pcsponsor-single-status-buttons li {
 	margin-right: 30px;
 	font-size: 14px;
 }
+.pcs-rounded .info p.pure-desc {
+	font-size: 20px;
+}
+
 .pcs-rounded .pictures .control {
 	width: 15%;
 	float:left;
@@ -192,7 +206,7 @@ ul.pcsponsor-single-status-buttons li {
 .pcsponsor-fund-form a.pure-button {
 	font-size:12px;
 	text-transform: uppercase;
-	padding: 4px 10px;
+	padding: 10px 15px;
 	margin-top: 1px;
 }
 

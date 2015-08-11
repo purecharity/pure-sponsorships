@@ -10,7 +10,7 @@ a.pure-button {
 }
 
 a.pure-button:hover {
-	background: #ccc;
+	color: #fff !important;
 }
 
 .col-sm-3 {
