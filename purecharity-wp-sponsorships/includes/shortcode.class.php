@@ -86,7 +86,6 @@ class Purecharity_Wp_Sponsorships_Shortcode {
 
       // Check for any filters, validating and sanitizing along the way
       // Append valid filters to $filters
-      $gender = '';
       if (isset($_GET['gender'])) {
         $gender = ucfirst(strtolower($_GET['gender']));
 
@@ -97,7 +96,6 @@ class Purecharity_Wp_Sponsorships_Shortcode {
 
       $range1 = $range2 = $range3 = $range4 = '';
 
-      $age = '';
       if (isset($_GET['age'])) {
         $age = $_GET['age'];
         if (preg_match('/[0-9-]*/', $_GET['age'])) {
@@ -118,16 +116,12 @@ class Purecharity_Wp_Sponsorships_Shortcode {
         }
       }
 
-      $country = '';
       if (isset($_GET['country'])) {
-        $country = urlencode(sanitize_text_field($_GET['country']));
-        $filters .= '&country='. $country;
+        $filters .= '&country='. urlencode(sanitize_text_field($_GET['country']));;
       }
 
-      $country = '';
-      if (isset($_GET['country'])) {
-        $country = urlencode(sanitize_text_field($_GET['country']));
-        $filters .= '&country='. $country;
+      if (isset($_GET['query'])) {
+        $filters .= '&search_filter='. urlencode(sanitize_text_field($_GET['query']));;
       }
 
       $full_filters = $filters;

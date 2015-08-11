@@ -1,3 +1,45 @@
+fieldset.sp-livefilter {
+  float: left;
+  border:none;
+}
+
+.sp-filtering {
+  float: right;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 0;
+}
+.sp-filtering legend {
+  margin-bottom:10px;
+}
+
+.sp-livefilter label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.sp-livefilter-input {
+  float:left;
+}
+
+.sp-filtering button {
+  border: none;
+  color: #FFF;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+.sp-filtering a {
+  border: none;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 12px;
+  margin: 10px 0 10px 0;
+  float: left;
+  display: block;
+  background: #e0e0e0;
+  border-radius: 3px;
+}
 
 a.pure-button {
 	background: #e0e0e0;
@@ -43,9 +85,9 @@ body .sponsorship_table .sponsorship-widget:hover {
 }
 
 .sponsors {
-	width: 15px; 
-	height: 15px; 
-	display: inline-block; 
+	width: 15px;
+	height: 15px;
+	display: inline-block;
 	background: #ccc;
 	border-radius: 100%;
 	text-indent: 100%;
@@ -231,7 +273,7 @@ ul.pcsponsor-status-buttons li {
 	padding:0;
 	height: 10px;
 	width: 10px;
-	background: #999; 
+	background: #999;
 	-webkit-border-radius: 100%;
 	-moz-border-radius: 100%;
 	border-radius: 100%;
@@ -244,11 +286,11 @@ ul.pcsponsor-single-status-buttons li {
 }
 
 ul.pcsponsor-status-buttons li.pcsponsor-taken {
-	background: #597FA2; 
+	background: #597FA2;
 }
 
 .pcsponsor-single-desc {
-	padding: 20px; 
+	padding: 20px;
 	text-align: center;
 background:#F0F0F0;
 border-top: 1px solid #fff;
@@ -264,7 +306,7 @@ border-top: 1px solid #fff;
 .pc_pagination {
 	float:left;
 	width: 100%;
-	margin-top: 20px; 
+	margin-top: 20px;
 }
 .pc_pagination ul {
 	list-style: none;
@@ -285,17 +327,17 @@ border-top: 1px solid #fff;
 	display: inline-block;
 	border-radius: 4px;
 	font-weight: 700;
-}	
+}
 .pc_pagination ul li a.pc_page-numbers:hover {
 	background: $primarycolor;
 	color: #fff;
 }
-		
+
 .pc_pagination ul li a.pc_page-numbers span.current {
 	background: #666;
 	color: #fff;
 	display: inline-block;
-	padding: 5px 10px;							
+	padding: 5px 10px;
 	border-radius: 4px;
 }
 

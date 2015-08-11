@@ -134,6 +134,12 @@ class Purecharity_Wp_Sponsorships_Admin {
 		);
 
 		add_settings_field(
+			'search_input', __( 'Display Global Search', 'wordpress' ),
+			array('Purecharity_Wp_Sponsorships_Admin', 'search_input_render'),
+			'psPluginPage', 'purecharity_sponsorships_display_psPluginPage_section'
+		);
+
+		add_settings_field(
 			'age_filter', __( 'Display Age Filter', 'wordpress' ),
 			array('Purecharity_Wp_Sponsorships_Admin', 'age_filter_render'),
 			'psPluginPage', 'purecharity_sponsorships_display_psPluginPage_section'
@@ -243,6 +249,22 @@ class Purecharity_Wp_Sponsorships_Admin {
 				<button type="button" id="generate-example" name="button">Load Example</button>
 			</div>
 		</p>
+		<?php
+	}
+
+	/**
+	 * Renders the global search.
+	 *
+	 * @since    1.1.1
+	 */
+	public static function search_input_render(  ) {
+		$options = get_option( 'purecharity_sponsorships_settings' );
+		?>
+		<input
+			type="checkbox"
+			name="purecharity_sponsorships_settings[search_input]"
+			<?php echo (isset($options['search_input'])) ? 'checked' : '' ?>
+			value="true">
 		<?php
 	}
 
