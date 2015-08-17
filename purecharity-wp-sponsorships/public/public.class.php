@@ -135,6 +135,7 @@ class Purecharity_Wp_Sponsorships_Public {
 		$options = get_option( 'purecharity_sponsorships_settings' );
 		$html = self::custom_css();
 		$html .= '<div class="pcsponsor-container">';
+		$html .= self::search_input();
 
 		$html .= '<div class="pcsponsor-filters">';
 		$html .= self::age_filter();
@@ -358,7 +359,7 @@ class Purecharity_Wp_Sponsorships_Public {
 							</ul>
 							<div class="pcsponsor-single-select pc-third-view">
 							'.self::render_sponsor_options().'
-							</div> 
+							</div>
 						</div>
 
 						<div class="control right">
@@ -486,4 +487,36 @@ class Purecharity_Wp_Sponsorships_Public {
 		return $html;
 	}
 
+	/**
+	 * Global search input.
+	 *
+	 * @since    1.1.1
+	 */
+	public static function search_input(){
+
+		$options = get_option( 'purecharity_sponsorships_settings' );
+
+		if(isset($options["search_input"])){
+
+			$html = '
+				<div class="sp-filtering">
+					<form method="get">
+						<fieldset class="livefilter sp-livefilter">
+							<legend>
+								<label for="livefilter-input">
+									<strong>Search Sponsorships:</strong>
+								</label>
+							</legend>
+							<input id="livefilter-input" class="sp-livefilter-input" value="'.@$_GET['query'].'" name="query" type="text">
+							<button class="sp-filtering-button" type="submit">Filter</button>
+							'. (@$_GET['query'] != '' ? '<a href="#" onclick="$(this).prev().prev().val(\'\'); $(this).parents(\'form\').submit(); return false;">Clear filter</a>' : '') .'
+						</fieldset>
+					</form>
+				</div>
+			';
+		}else{
+			$html = '';
+		}
+		return $html;
+	}
 }
