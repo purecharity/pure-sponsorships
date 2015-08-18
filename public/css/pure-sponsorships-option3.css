@@ -76,6 +76,7 @@ ul.pcsponsor-single-status-buttons li {
 }
 
 .pcsponsor-single-select {
+	border: none;
 	background: none;
 	padding: 0px;
 	text-align: center;
