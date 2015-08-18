@@ -87,16 +87,13 @@ ul.pcsponsor-single-status-buttons li {
 
 
 @media only screen and (max-width: 421px) {
-
-	.pcsponsor-item {
-		width: 100%;
-		height: 430px;
-	}
-
-	.pcsponsor-image {
-		height: 320px;
-	}
-
+	.pcsponsor-item { width: 100%; height: 430px; }
+	.pcsponsor-image { height: 320px;	}
+	.pcs-rounded > .info, .pictures { width: 100% !important; }
+	.pcs-rounded > .info h1 { font-size: 40px !important; }
+	.pcs-navigation a span { font-size: 14px !important; }
+	.pcs-navigation a { font-size: 10px !important; font-weight: bold; }
+	.pcs-rounded .info .slots span { font-size: 18px; }
 }
 
 /* Single View */
