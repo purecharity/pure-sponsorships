@@ -34,7 +34,7 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 * Added exclusion filter to the shortcode.
 
 = 1.1.2 =
-* Change the way it shows when there is only one sponsorship slot available.
+* Change the way it shows when there is only one sponsorship slot available, improve mobile styles.
 
 = 1.1.1 =
 * Added text search.
