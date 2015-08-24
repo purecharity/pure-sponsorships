@@ -18,6 +18,7 @@
  text-transform: uppercase;
 	margin:0;padding:0;
 	line-height: 100%;
+	text-align: center;
 }
 
 .pcsponsor-item p {
@@ -76,6 +77,7 @@ ul.pcsponsor-single-status-buttons li {
 }
 
 .pcsponsor-single-select {
+	border: none;
 	background: none;
 	padding: 0px;
 	text-align: center;

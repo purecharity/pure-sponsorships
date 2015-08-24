@@ -168,6 +168,92 @@ class Purecharity_Wp_Sponsorships_Public {
 	}
 
 	/**
+	 * Single child view.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function single(){
+		$options = get_option( 'purecharity_sponsorships_settings' );
+		$html = self::custom_css();
+
+		if(isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3'){
+			$custom_fields =
+			$html .= '
+				<div class="pcs-rounded">
+
+					<div class="info">
+						<div class="slots">
+							<ul>'.self::the_bullets(self::$sponsorship).'</ul>
+							'. self::sponsorship_slots_text() .'
+						</div>
+						<h1>'.self::$sponsorship->name.'</h1>
+						<p class="pure-desc">'. self::$sponsorship->description .'</p>
+						'.self::render_custom_fields().'
+					</div>
+
+					<div class="pictures">
+
+						<div class="control left">
+							<a href="#"> < </a>
+						</div>
+
+						<div class="album">
+							<div class="rail">
+								<div class="picture" style="background-image: url('.self::$sponsorship->images->small.');">
+								</div>
+							</div>
+							<ul class="controls">
+								<li class="active"><a href="#picture-1"></a></li>
+								<li><a href="#picture-2"></a></li>
+							</ul>
+							<div class="pcsponsor-single-select pc-third-view">
+							'.self::render_sponsor_options().'
+							</div>
+						</div>
+
+						<div class="control right">
+							<a href="#"> > </a>
+						</div>
+					</div>
+				</div>
+
+				<div class="pcs-navigation">
+					'.self::lower_links().'
+				</div>
+			';
+
+		}else{
+			$html .= '
+				<div class="pcsponsor-single-container">
+	        		<p class="pcsponsorships-return"><a href="#" onclick="javascript:history.go(-1); return false;">&#10094; Return to Sponsorship List</a></p>
+
+					<div class="pcsponsor-single-image">
+						<img src="'.self::$sponsorship->images->small.'" alt="'.self::$sponsorship->name.'"/>
+					</div>
+					<div class="pcsponsor-single-content">
+						<div class="pcsponsor-single-info">
+							<h4>'.self::$sponsorship->name.'</h4>
+							<ul class="pcsponsor-status-buttons pcsponsor-single-status-buttons">
+								'.self::the_bullets(self::$sponsorship).'
+							</ul>
+							'. self::sponsorship_slots_text() .'
+						</div>
+						<div class="pcsponsor-single-desc">
+							<p>'.self::$sponsorship->description.'</p>
+						</div>
+						<div class="pcsponsor-single-select">
+							'.self::render_sponsor_options().'
+						</div>
+					</div>
+			';
+		}
+
+  	$html .= Purecharity_Wp_Base_Public::powered_by();
+
+		return $html;
+	}
+
+	/**
 	 * Renders the lower content of the listing options.
 	 *
 	 * @since    1.1
@@ -177,7 +263,9 @@ class Purecharity_Wp_Sponsorships_Public {
 
 		$components = array();
 		$components['title'] = '<h4>'.$sponsorship->name.'</h4>';
-		$components['bullets'] = '<ul class="pcsponsor-status-buttons">'.self::the_bullets($sponsorship).'</ul>';
+		if((int)$total_available > 1){
+			$components['bullets'] = '<ul class="pcsponsor-status-buttons">'.self::the_bullets($sponsorship).'</ul>';
+		}
 		$components['info'] = '<p class="pcsponsor-status">
 																		 	'.$sponsorship->number_available.' of '.$total_available.'
 																		 	'.pluralize($total_available, 'Sponsorship').'
@@ -260,11 +348,14 @@ class Purecharity_Wp_Sponsorships_Public {
 		if((int)$taken > (int)$total_available){ $taken = $total_available; }
 
 		$html = '';
-		for ($i = 1; $i <= $total_available; $i++) {
-			$klass = ($i <= $taken) ? 'pcsponsor-taken' : '';
-	   	$html .= '<li class="'. $klass .'"></li>';
+		if((int)$total_available > 1){
+			for ($i = 1; $i <= $total_available; $i++) {
+				$klass = ($i <= $taken) ? 'pcsponsor-taken' : '';
+		   	$html .= '<li class="'. $klass .'"></li>';
+			}
 		}
 		return $html;
+
 	}
 
 
@@ -312,98 +403,27 @@ class Purecharity_Wp_Sponsorships_Public {
 
 
 	/**
-	 * Single child view.
+	 * Renders the available sponsorships slot for the single view. Returns blank if there is only one.
 	 *
-	 * @since    1.0.0
+	 * @since    1.1.2
 	 */
-	public static function single(){
-		$options = get_option( 'purecharity_sponsorships_settings' );
-		$total_available = self::$sponsorship->sponsors_goal;
-		$available = self::$sponsorship->number_available;
-		if((int)$available < 0){ $available = 0; }
-		$html = self::custom_css();
+	public static function sponsorship_slots_text(){
 
-		if(isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3'){
-			$custom_fields =
-			$html .= '
-				<div class="pcs-rounded">
+		$total_available = (int)self::$sponsorship->sponsors_goal;
+		$available = (int)self::$sponsorship->number_available;
+		if($available < 0){ $available = 0; }
 
-					<div class="info">
-						<div class="slots">
-							<ul>'.self::the_bullets(self::$sponsorship).'</ul>
-							<span>
-								'.self::$sponsorship->number_available.' of '.$total_available.'
-								'.pluralize($total_available, 'Sponsorship').'
-								Available
-							</span>
-						</div>
-						<h1>'.self::$sponsorship->name.'</h1>
-						<p class="pure-desc">'. self::$sponsorship->description .'</p>
-						'.self::render_custom_fields().'
-					</div>
+		$html = '';
 
-					<div class="pictures">
-
-						<div class="control left">
-							<a href="#"> < </a>
-						</div>
-
-						<div class="album">
-							<div class="rail">
-								<div class="picture" style="background-image: url('.self::$sponsorship->images->small.');">
-								</div>
-							</div>
-							<ul class="controls">
-								<li class="active"><a href="#picture-1"></a></li>
-								<li><a href="#picture-2"></a></li>
-							</ul>
-							<div class="pcsponsor-single-select pc-third-view">
-							'.self::render_sponsor_options().'
-							</div>
-						</div>
-
-						<div class="control right">
-							<a href="#"> > </a>
-						</div>
-					</div>
-				</div>
-
-				<div class="pcs-navigation">
-					'.self::lower_links().'
-				</div>
-			';
-
-		}else{
-			$html .= '
-				<div class="pcsponsor-single-container">
-	        		<p class="pcsponsorships-return"><a href="#" onclick="javascript:history.go(-1); return false;">&#10094; Return to Sponsorship List</a></p>
-
-					<div class="pcsponsor-single-image">
-						<img src="'.self::$sponsorship->images->small.'" alt="'.self::$sponsorship->name.'"/>
-					</div>
-					<div class="pcsponsor-single-content">
-						<div class="pcsponsor-single-info">
-							<h4>'.self::$sponsorship->name.'</h4>
-							<ul class="pcsponsor-status-buttons pcsponsor-single-status-buttons">
-								'.self::the_bullets(self::$sponsorship).'
-							</ul>
-							<p class="pcsponsor-single-status">
-								'.self::$sponsorship->number_available.' of '.$total_available.'
-								'.pluralize($total_available, 'Sponsorship').'
-								Available
-							</p>
-						</div>
-						<div class="pcsponsor-single-desc">
-							<p>'.self::$sponsorship->description.'</p>
-						</div>
-						<div class="pcsponsor-single-select">
-							'.self::render_sponsor_options().'
-						</div>
-					</div>
+		if($available > 1){
+			$html = '
+			<span>
+				'.$available.' of '.$total_available.'
+				'.pluralize($total_available, 'Sponsorship').'
+				Available
+			</span>
 			';
 		}
-
-  	$html .= Purecharity_Wp_Base_Public::powered_by();
 
 		return $html;
 	}
@@ -471,17 +491,23 @@ class Purecharity_Wp_Sponsorships_Public {
 
 		$options = get_option( 'purecharity_sponsorships_settings' );
 
-		$html = '<form method="get" action="https://purecharity.com/sponsorships/'. self::$sponsorship->id .'/fund" class="pcsponsor-fund-form">';
-		$html .= '<select id="sponsorship_supporter_shares" name="amount">';
-		$html .= '<option>Choose Sponsorship Level</option>';
-		for ($i = 1 ; $i <= self::$sponsorship->number_available ; $i++) {
-			$termName = 'Sponsorship';
-			if ($i > 1) {
-				$termName = 'Sponsorships';
+		$html = '<form method="get" action="'.Purecharity_Wp_Base_Public::pc_url().'/sponsorships/'. self::$sponsorship->id .'/fund" class="pcsponsor-fund-form">';
+
+		if((int)self::$sponsorship->sponsors_goal > 3){
+			$html .= '<select id="sponsorship_supporter_shares" name="amount">';
+			$html .= '<option>Choose Sponsorship Level</option>';
+			for ($i = 1 ; $i <= self::$sponsorship->number_available ; $i++) {
+				$termName = 'Sponsorship';
+				if ($i > 1) {
+					$termName = 'Sponsorships';
+				}
+				$html .= '<option value="'. (self::$sponsorship->funding_per * $i) .'.0">'. $i .' '. $termName .' - $'. (self::$sponsorship->funding_per * $i) .'.00 Monthly</option>';
 			}
-			$html .= '<option value="'. (self::$sponsorship->funding_per * $i) .'.0">'. $i .' '. $termName .' - $'. (self::$sponsorship->funding_per * $i) .'.00 Monthly</option>';
+			$html .= '</select>';
+		}else{
+			$html .= '<input type="hidden" name="amount" value="'.self::$sponsorship->funding_per.'" />';
 		}
-		$html .= '</select>';
+
 		$html .= '<a class="pure-button submit" href="#">Sponsor</a>';
 		$html .= '</form>';
 		return $html;
