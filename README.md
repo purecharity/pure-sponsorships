@@ -20,9 +20,10 @@ It depends on the Pure Charity Base Plugin being installed and it's credentials 
 ## Shortcodes
 
 ### Sponsorships Listing
-`[sponsorships]`
+`[sponsorships program_id=X]`
 
 Possible parameters:
+* `program_id` - (Required) The id of the program to show
 * `per_page` - The amount of records to fetch per page
 * `reject` - (1,2,3) List of IDs of sponsorships to reject on the listing
 
@@ -30,7 +31,7 @@ Possible parameters:
 `[sponsorship_child]`
 
 Possible parameters:
-* `per_page` - The amount of records to fetch per page
+* `child_id` - The id of the child to show
 
 ### Sponsorship Program
 `[sponsorship id=X]`
