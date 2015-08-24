@@ -70,8 +70,10 @@ class Purecharity_Wp_Sponsorships_Shortcode {
 
     // Set up and retrieve attributes
     $options = shortcode_atts( array(
-      'per_page' => false
+      'per_page' => false,
+      'reject' => false
     ), $atts );
+
 
     $sponsorship_id = $atts["program_id"];
 
@@ -122,6 +124,10 @@ class Purecharity_Wp_Sponsorships_Shortcode {
 
       if (isset($_GET['query'])) {
         $filters .= '&search_filter='. urlencode(sanitize_text_field($_GET['query']));;
+      }
+
+      if($options['reject']){
+        $filters .= '&reject='.$options['reject'];
       }
 
       $full_filters = $filters;

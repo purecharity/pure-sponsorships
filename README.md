@@ -24,6 +24,7 @@ It depends on the Pure Charity Base Plugin being installed and it's credentials 
 
 Possible parameters:
 * `per_page` - The amount of records to fetch per page
+* `reject` - (1,2,3) List of IDs of sponsorships to reject on the listing
 
 ### Single Child
 `[sponsorship_child]`
