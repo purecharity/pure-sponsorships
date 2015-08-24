@@ -30,5 +30,10 @@ Possible parameters:
 `[sponsorship_child]`
 
 Possible parameters:
+* `per_page` - The amount of records to fetch per page
 
-* `child_id` - The amount of records to fetch per page
+### Sponsorship Program
+`[sponsorship id=X]`
+
+Possible parameters:
+* `id` - The sponsorship id
