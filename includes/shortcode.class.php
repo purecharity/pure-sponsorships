@@ -70,8 +70,10 @@ class Purecharity_Wp_Sponsorships_Shortcode {
 
     // Set up and retrieve attributes
     $options = shortcode_atts( array(
-      'per_page' => false
+      'per_page' => false,
+      'reject' => false
     ), $atts );
+
 
     $sponsorship_id = $atts["program_id"];
 
@@ -86,7 +88,6 @@ class Purecharity_Wp_Sponsorships_Shortcode {
 
       // Check for any filters, validating and sanitizing along the way
       // Append valid filters to $filters
-      $gender = '';
       if (isset($_GET['gender'])) {
         $gender = ucfirst(strtolower($_GET['gender']));
 
@@ -97,7 +98,6 @@ class Purecharity_Wp_Sponsorships_Shortcode {
 
       $range1 = $range2 = $range3 = $range4 = '';
 
-      $age = '';
       if (isset($_GET['age'])) {
         $age = $_GET['age'];
         if (preg_match('/[0-9-]*/', $_GET['age'])) {
@@ -118,16 +118,16 @@ class Purecharity_Wp_Sponsorships_Shortcode {
         }
       }
 
-      $country = '';
       if (isset($_GET['country'])) {
-        $country = urlencode(sanitize_text_field($_GET['country']));
-        $filters .= '&country='. $country;
+        $filters .= '&country='. urlencode(sanitize_text_field($_GET['country']));;
       }
 
-      $country = '';
-      if (isset($_GET['country'])) {
-        $country = urlencode(sanitize_text_field($_GET['country']));
-        $filters .= '&country='. $country;
+      if (isset($_GET['query'])) {
+        $filters .= '&search_filter='. urlencode(sanitize_text_field($_GET['query']));;
+      }
+
+      if($options['reject']){
+        $filters .= '&reject='.$options['reject'];
       }
 
       $full_filters = $filters;
@@ -142,7 +142,7 @@ class Purecharity_Wp_Sponsorships_Shortcode {
         $filters .= '&limit='. (int) $limit;
       }
 
-      // Grab the sponsorships 
+      // Grab the sponsorships
       $sponsorships = self::$base_plugin->api_call('sponsorships?sponsorship_program_id='. $sponsorship_id . $filters);
       $sponsorships_full = self::$base_plugin->api_call('sponsorships?sponsorship_program_id='. $sponsorship_id . $full_filters);
 
@@ -173,27 +173,6 @@ class Purecharity_Wp_Sponsorships_Shortcode {
       Purecharity_Wp_Sponsorships_Public::$sponsorship = $sponsorship->sponsorship;
 
       return Purecharity_Wp_Sponsorships_Public::single();
-    }
-  }
-
-  /**
-   * Sponsorships single view shortcode.
-   *
-   * @since    1.0.0
-   */
-  public static function sponsorship_shortcode($atts)
-  {
-    $options = shortcode_atts( array(
-      'id' => false
-    ), $atts );
-
-    if ($options['id']) {
-      $sponsorship = self::$base_plugin->api_call('sponsorships/'. $options['id']);
-      $sponsorship = $sponsorship->sponsorship;
-
-      Pure_Sponsorships_Display::$sponsorship = $sponsorship;
-
-      return Pure_Sponsorships_Display::single();
     }
   }
 }

@@ -30,6 +30,24 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 1.1.3 =
+* Added exclusion filter to the shortcode.
+
+= 1.1.2 =
+* Change the way it shows when there is only one sponsorship slot available, improve mobile styles.
+
+= 1.1.1 =
+* Added text search.
+
+= 1.1 =
+* Added alternative rounded layout.
+
+= 1.0.6 =
+* Updated the sponsorships goal calculation.
+
+= 1.0.4 =
+* Removed obsolete shortcode.
+
 = 1.0.3 =
 * Added the GitHub updater process.
 
