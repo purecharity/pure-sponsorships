@@ -250,7 +250,7 @@ p.description {
 }
 
 .pcsponsor-single-info {
-	background: #e0e0e0;
+	background: transparent;
 	padding: 20px;
 	text-align: center;
 font-size: 1.2em;
@@ -292,13 +292,9 @@ ul.pcsponsor-status-buttons li.pcsponsor-taken {
 .pcsponsor-single-desc {
 	padding: 20px;
 	text-align: center;
-background:#F0F0F0;
-border-top: 1px solid #fff;
 }
 
 .pcsponsor-single-select {
-	background: #f0f0f0;
-	border-top: 1px solid #fff;
 	padding: 20px;
 	text-align: center;
 }

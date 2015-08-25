@@ -240,6 +240,7 @@ class Purecharity_Wp_Sponsorships_Public {
 						</div>
 						<div class="pcsponsor-single-desc">
 							<p>'.self::$sponsorship->description.'</p>
+							<p>'.self::render_custom_fields().'</p>
 						</div>
 						<div class="pcsponsor-single-select">
 							'.self::render_sponsor_options().'

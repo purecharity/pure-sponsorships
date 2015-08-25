@@ -1,6 +1,4 @@
-(function( jQuery ) {
-	'use strict';
-
+jQuery(document).ready(function(){
 	jQuery(document).on('change', '.pcsponsor-filters select', function(){
 		filterSponsorships();
 	})
@@ -8,9 +6,9 @@
 	jQuery(document).on('click', '.submit', function(){
 		jQuery(this).parents('form').submit();
 		return false;
-	})
+	});
 
-})( jQuery );
+});
 
 window.params = {};
 var filterSponsorships = function() {
