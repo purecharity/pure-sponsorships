@@ -265,12 +265,15 @@ class Purecharity_Wp_Sponsorships_Public {
 		$components['title'] = '<h4>'.$sponsorship->name.'</h4>';
 		if((int)$total_available > 1){
 			$components['bullets'] = '<ul class="pcsponsor-status-buttons">'.self::the_bullets($sponsorship).'</ul>';
+			$components['info'] = '<p class="pcsponsor-status">
+														 	'.$sponsorship->number_available.' of '.$total_available.'
+														 	'.pluralize($total_available, 'Sponsorship').'
+														 	Available
+														 </p>';
+		}else{
+			$components['bullets'] = '';
+			$components['info'] = '';
 		}
-		$components['info'] = '<p class="pcsponsor-status">
-																		 	'.$sponsorship->number_available.' of '.$total_available.'
-																		 	'.pluralize($total_available, 'Sponsorship').'
-																		 	Available
-																		 </p>';
 		if(isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3'){
 			return $components['title'].$components['info'].$components['bullets'];
 		}else{
