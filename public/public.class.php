@@ -497,7 +497,7 @@ class Purecharity_Wp_Sponsorships_Public {
 
 		$html = '<form method="get" action="'.Purecharity_Wp_Base_Public::pc_url().'/sponsorships/'. self::$sponsorship->id .'/fund" class="pcsponsor-fund-form">';
 
-		if((int)self::$sponsorship->sponsors_goal > 3){
+		if((int)self::$sponsorship->sponsors_goal > 1 && self::$sponsorship->number_available > 0){
 			$html .= '<select id="sponsorship_supporter_shares" name="amount">';
 			$html .= '<option>Choose Sponsorship Level</option>';
 			for ($i = 1 ; $i <= self::$sponsorship->number_available ; $i++) {
@@ -511,8 +511,9 @@ class Purecharity_Wp_Sponsorships_Public {
 		}else{
 			$html .= '<input type="hidden" name="amount" value="'.self::$sponsorship->funding_per.'" />';
 		}
-
-		$html .= '<a class="pure-button submit" href="#">Sponsor</a>';
+		if(self::$sponsorship->number_available > 0){
+			$html .= '<a class="pure-button submit" href="#">Sponsor</a>';
+		}
 		$html .= '</form>';
 		return $html;
 	}
