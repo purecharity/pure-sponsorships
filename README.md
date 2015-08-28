@@ -7,7 +7,8 @@ It depends on the Pure Charity Base Plugin being installed and it's credentials 
 ## Features
 
 * The plugin enables 3 shortcodes for use in any page you want to.
-* Possibility to configure between 2 display styles.
+* Possibility to configure between 3 display styles.
+* Possibility to configure the plugin to use custom fields you have on the app.
 * Possibility to customize the main color of the elements.
 * Possibility to add a custom image to show as brand on the views.
 
