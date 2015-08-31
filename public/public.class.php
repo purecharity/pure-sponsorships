@@ -392,11 +392,8 @@ class Purecharity_Wp_Sponsorships_Public {
 				.single-sponsorship .styledButton ,
 				.pcs-rounded .info .slots ul li.taken,
 				.pure-button { background: '. $color .' !important; color: #FFF !important; }
-				.pcsponsor-content p,
-				.pcsponsor-content h4,
 				.pcsponsorships-return a,
 				.pcs-rounded .info .slots ul li.pcsponsor-taken,
-				.pcs-rounded .info p,
 				.pcs-navigation a span
 				.single-sponsorship a { color: '. $color .' !important; }
 			</style>
