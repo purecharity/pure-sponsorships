@@ -478,7 +478,8 @@ class Purecharity_Wp_Sponsorships_Public {
 		}
 
 		if($html != ''){
-			$return = "<h4>about ".explode(' ', self::$sponsorship->name)[0]."</h4><p>$html</p>";
+			$exp = explode(' ', self::$sponsorship->name);
+			$return = "<h4>about ".$exp[0]."</h4><p>$html</p>";
 		}else{
 			$return = '';
 		}
