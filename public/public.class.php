@@ -424,6 +424,10 @@ class Purecharity_Wp_Sponsorships_Public {
 				Available
 			</span>
 			';
+		}else{
+			if(self::$sponsorship->is_sponsored){
+				$html = '<span>Sponsored</span>';
+			}
 		}
 
 		return $html;
