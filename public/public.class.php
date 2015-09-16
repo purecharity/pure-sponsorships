@@ -270,10 +270,10 @@ class Purecharity_Wp_Sponsorships_Public {
 														 	'.$sponsorship->number_available.' of '.$total_available.'
 														 	'.pluralize($total_available, 'Sponsorship').'
 														 	Available
-														 </p>'.(($sponsorship->is_sponsored && (isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3')) ? '<p>Sponsored</p>' : '');
+														 </p>';
 		}else{
 			$components['bullets'] = '';
-			$components['info'] = '';
+			$components['info'] = (($sponsorship->is_sponsored && (isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3')) ? '<p>Sponsored</p>' : '');
 		}
 		if(isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3'){
 			return $components['title'].$components['info'].$components['bullets'];
