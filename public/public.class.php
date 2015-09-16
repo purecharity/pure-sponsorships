@@ -270,7 +270,7 @@ class Purecharity_Wp_Sponsorships_Public {
 														 	'.$sponsorship->number_available.' of '.$total_available.'
 														 	'.pluralize($total_available, 'Sponsorship').'
 														 	Available
-														 </p>';
+														 </p>'.(($sponsorship->is_sponsored && (isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3')) ? '<p>Sponsored</p>' : '');
 		}else{
 			$components['bullets'] = '';
 			$components['info'] = '';
