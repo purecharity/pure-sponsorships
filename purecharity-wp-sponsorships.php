@@ -86,9 +86,15 @@ register_activation_hook( __FILE__, array( 'Purecharity_Wp_Sponsorships', 'activ
  * @since    1.0.1
  */
 function ss_force_template() {
-	$options = get_option( 'purecharity_sponsorships_settings' );
-  include(get_template_directory() . '/' . $options['single_view_template']);
-  exit;
+  try{
+    $options = get_option( 'purecharity_sponsorships_settings' );
+    if(@include(get_template_directory() . '/' . $options['single_view_template'])){
+      exit;
+    }
+  }
+  catch(Exception $e){
+    echo "Custom template invalid.";
+  }
 }
 
 /*

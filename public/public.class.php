@@ -416,7 +416,7 @@ class Purecharity_Wp_Sponsorships_Public {
 
 		$html = '';
 
-		if($available > 1){
+		if($total_available > 1 && $available > 0){
 			$html = '
 			<span>
 				'.$available.' of '.$total_available.'
@@ -424,10 +424,10 @@ class Purecharity_Wp_Sponsorships_Public {
 				Available
 			</span>
 			';
-		}else{
-			if(self::$sponsorship->is_sponsored){
-				$html = '<span>Sponsored</span>';
-			}
+		}elseif($total_available > 1 && $available == 0){
+			$html = '<span>Fully Sponsored</span>';
+		}elseif($available == 0){
+			$html = '<span>Sponsored</span>';
 		}
 
 		return $html;
