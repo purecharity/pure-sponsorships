@@ -233,7 +233,9 @@ class Purecharity_Wp_Sponsorships_Public {
 					<div class="pcsponsor-single-content">
 						<div class="pcsponsor-single-info">
 							<h4>'.self::$sponsorship->name.'</h4>
-							'.self::the_bullets(self::$sponsorship).'
+							<ul class="pcsponsor-status-buttons pcsponsor-single-status-buttons">
+								'.self::the_bullets(self::$sponsorship).'
+							</ul>
 							'. self::sponsorship_slots_text() .'
 						</div>
 						<div class="pcsponsor-single-desc">
@@ -263,7 +265,7 @@ class Purecharity_Wp_Sponsorships_Public {
 		$components = array();
 		$components['title'] = '<h4>'.$sponsorship->name.'</h4>';
 		if((int)$total_available > 1){
-			$components['bullets'] = '<ul class="pcsponsor-status-buttons pcsponsor-single-status-buttons">'.self::the_bullets($sponsorship).'</ul>';
+			$components['bullets'] = '<ul class="pcsponsor-status-buttons">'.self::the_bullets($sponsorship).'</ul>';
 			$components['info'] = '<p class="pcsponsor-status">
 														 	'.$sponsorship->number_available.' of '.$total_available.'
 														 	'.pluralize($total_available, 'Sponsorship').'
@@ -351,10 +353,12 @@ class Purecharity_Wp_Sponsorships_Public {
 
 		$html = '';
 		if((int)$total_available > 1){
+			$html .= '<ul>';
 			for ($i = 1; $i <= $total_available; $i++) {
 				$klass = ($i <= $taken) ? 'pcsponsor-taken' : '';
 		   	$html .= '<li class="'. $klass .'"></li>';
 			}
+			$html .= '</ul>';
 		}
 		return $html;
 
