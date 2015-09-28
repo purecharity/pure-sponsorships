@@ -176,6 +176,10 @@ class Purecharity_Wp_Sponsorships_Public {
 		$options = get_option( 'purecharity_sponsorships_settings' );
 		$html = self::custom_css();
 
+		echo "<pre>";
+		var_dump(self::$sponsorship);
+		exit;
+
 		if(isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3'){
 			$custom_fields =
 			$html .= '
@@ -260,7 +264,7 @@ class Purecharity_Wp_Sponsorships_Public {
 	 * @since    1.1
 	 */
 	public static function lower_listing_content($sponsorship, $options){
-		$total_available = $sponsorship->number_available + $sponsorship->quantity_taken;
+		$total_available = $sponsorship->sponsors_goal;
 
 		$components = array();
 		$components['title'] = '<h4>'.$sponsorship->name.'</h4>';
