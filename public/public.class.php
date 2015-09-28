@@ -176,10 +176,6 @@ class Purecharity_Wp_Sponsorships_Public {
 		$options = get_option( 'purecharity_sponsorships_settings' );
 		$html = self::custom_css();
 
-		echo "<pre>";
-		var_dump(self::$sponsorship);
-		exit;
-
 		if(isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3'){
 			$custom_fields =
 			$html .= '
