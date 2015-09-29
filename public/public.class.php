@@ -173,6 +173,7 @@ class Purecharity_Wp_Sponsorships_Public {
 	 * @since    1.0.0
 	 */
 	public static function single(){
+
 		$options = get_option( 'purecharity_sponsorships_settings' );
 		$html = self::custom_css();
 
@@ -262,12 +263,15 @@ class Purecharity_Wp_Sponsorships_Public {
 	public static function lower_listing_content($sponsorship, $options){
 		$total_available = $sponsorship->sponsors_goal;
 
+		$available = self::$sponsorship->sponsors_goal - self::$sponsorship->quantity_taken;
+ 		if($available < 0){ $available = 0; }
+
 		$components = array();
 		$components['title'] = '<h4>'.$sponsorship->name.'</h4>';
 		if((int)$total_available > 1){
 			$components['bullets'] = '<ul class="pcsponsor-status-buttons">'.self::the_bullets($sponsorship).'</ul>';
 			$components['info'] = '<p class="pcsponsor-status">
-														 	'.$sponsorship->number_available.' of '.$total_available.'
+														 	'.$available.' of '.$total_available.'
 														 	'.pluralize($total_available, 'Sponsorship').'
 														 	Available
 														 </p>';
@@ -413,8 +417,9 @@ class Purecharity_Wp_Sponsorships_Public {
 	public static function sponsorship_slots_text(){
 
 		$total_available = (int)self::$sponsorship->sponsors_goal;
-		$available = (int)self::$sponsorship->number_available;
-		if($available < 0){ $available = 0; }
+
+		$available = self::$sponsorship->sponsors_goal - self::$sponsorship->quantity_taken;
+ 		if($available < 0){ $available = 0; }
 
 		$html = '';
 
@@ -499,12 +504,15 @@ class Purecharity_Wp_Sponsorships_Public {
 
 		$options = get_option( 'purecharity_sponsorships_settings' );
 
+		$available = self::$sponsorship->sponsors_goal - self::$sponsorship->quantity_taken;
+ 		if($available < 0){ $available = 0; }
+
 		$html = '<form method="get" action="'.Purecharity_Wp_Base_Public::pc_url().'/sponsorships/'. self::$sponsorship->id .'/fund" class="pcsponsor-fund-form">';
 
-		if((int)self::$sponsorship->sponsors_goal > 1 && self::$sponsorship->number_available > 0){
+		if((int)self::$sponsorship->sponsors_goal > 1 && $available > 0){
 			$html .= '<select id="sponsorship_supporter_shares" name="amount">';
 			$html .= '<option>Choose Sponsorship Level</option>';
-			for ($i = 1 ; $i <= self::$sponsorship->number_available ; $i++) {
+			for ($i = 1 ; $i <= $available ; $i++) {
 				$termName = 'Sponsorship';
 				if ($i > 1) {
 					$termName = 'Sponsorships';
@@ -515,7 +523,7 @@ class Purecharity_Wp_Sponsorships_Public {
 		}else{
 			$html .= '<input type="hidden" name="amount" value="'.self::$sponsorship->funding_per.'" />';
 		}
-		if(self::$sponsorship->number_available > 0){
+		if($available > 0){
 			$html .= '<a class="pure-button submit" href="#">Sponsor</a>';
 		}
 		$html .= '</form>';
