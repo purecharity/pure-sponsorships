@@ -263,7 +263,7 @@ class Purecharity_Wp_Sponsorships_Public {
 	public static function lower_listing_content($sponsorship, $options){
 		$total_available = $sponsorship->sponsors_goal;
 
-		$available = self::$sponsorship->sponsors_goal - self::$sponsorship->quantity_taken;
+		$available = $sponsorship->sponsors_goal - $sponsorship->quantity_taken;
  		if($available < 0){ $available = 0; }
 
 		$components = array();
