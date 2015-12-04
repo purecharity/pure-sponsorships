@@ -530,9 +530,10 @@ class Purecharity_Wp_Sponsorships_Admin {
 	public function enqueue_scripts() {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script('jquery-ui-sortable');
 		wp_enqueue_script( 'admin-uploader', plugins_url( 'admin/js/uploader-script.js' , dirname(__FILE__) ) );
-	    wp_enqueue_script('media-upload');
-	    wp_enqueue_script('thickbox');
+    wp_enqueue_script('media-upload');
+    wp_enqueue_script('thickbox');
 	}
 
 }
