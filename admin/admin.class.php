@@ -275,12 +275,15 @@ class Purecharity_Wp_Sponsorships_Admin {
 	 * @since    1.0.1
 	 */
 	public static function single_view_template_render(  ) {
+
+
 		$options = get_option( 'purecharity_sponsorships_settings' );
+		$templates = purecharity_get_templates();
 		?>
 		<select name="purecharity_sponsorships_settings[single_view_template]">
 			<option value="">Inherit from the listing page</option>
-			<?php foreach(get_page_templates() as $template){ ?>
-				<option <?php echo $template == @$options['single_view_template'] ? 'selected' : '' ?>><?php echo $template ?></option>
+			<?php foreach($templates as $key => $template){ ?>
+				<option <?php echo $template == @$options['single_view_template'] ? 'selected' : '' ?> value="<?php echo $template; ?>"><?php echo "$key ($template)" ?></option>
 			<?php } ?>
 		</select>
 		<?php
