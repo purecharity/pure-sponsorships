@@ -93,9 +93,12 @@ register_activation_hook( __FILE__, array( 'Purecharity_Wp_Sponsorships', 'activ
 function ss_force_template() {
   try{
     $options = get_option( 'purecharity_sponsorships_settings' );
-    if(@include(get_template_directory() . '/' . $options['single_view_template'])){
-      exit;
+    if($options['single_view_template'] == 'purecharity-plugin-template.php'){
+      include(purecharity_plugin_template());
+    }else{
+      include(TEMPLATEPATH . '/' . $options['single_view_template']); 
     }
+    exit;
   }
   catch(Exception $e){
     echo "Custom template invalid.";
