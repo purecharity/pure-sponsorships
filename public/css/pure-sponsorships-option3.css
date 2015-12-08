@@ -52,7 +52,7 @@ p.pcsponsor-full {
 ul.pcsponsor-status-buttons {
 	text-align: center;
 	margin: 2px 0 0;
-	padding:0;
+	padding:0 !important;
 	list-style: none;
 }
 
