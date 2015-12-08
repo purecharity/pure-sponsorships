@@ -183,7 +183,7 @@ class Purecharity_Wp_Sponsorships_Public {
 
 					<div class="info">
 						<div class="slots">
-							'.self::the_bullets(self::$sponsorship).'
+							<ul class="no-padding">'.self::the_bullets(self::$sponsorship).'</ul>
 							'. self::sponsorship_slots_text() .'
 						</div>
 						<h1>'.self::$sponsorship->name.'</h1>
@@ -356,12 +356,10 @@ class Purecharity_Wp_Sponsorships_Public {
 
 		$html = '';
 		if((int)$total_available > 1){
-			$html .= '<ul>';
 			for ($i = 1; $i <= $total_available; $i++) {
 				$klass = ($i <= $taken) ? 'pcsponsor-taken' : '';
 		   	$html .= '<li class="'. $klass .'"></li>';
 			}
-			$html .= '</ul>';
 		}
 		return $html;
 
@@ -401,6 +399,7 @@ class Purecharity_Wp_Sponsorships_Public {
 				.pcs-rounded .info .slots ul li.pcsponsor-taken,
 				.pcs-navigation a span
 				.single-sponsorship a { color: '. $color .' !important; }
+				.pcs-rounded .info p { color: '. $color .' !important; }
 			</style>
 		';
 
