@@ -106,14 +106,6 @@ class Purecharity_Wp_Sponsorships_Admin {
 		);
 
 		add_settings_field(
-			'branding_image',
-			__( 'Single Sponsor Branding Image', 'wordpress' ),
-			array('Purecharity_Wp_Sponsorships_Admin', 'branding_image_render'),
-			'psPluginPage',
-			'purecharity_sponsorships_psPluginPage_section'
-		);
-
-		add_settings_field(
 			'single_view_template', __( 'Single view template', 'wordpress' ),
 			array('Purecharity_Wp_Sponsorships_Admin', 'single_view_template_render'),
 			'psPluginPage',
@@ -396,23 +388,6 @@ class Purecharity_Wp_Sponsorships_Admin {
 		$options = get_option( 'purecharity_sponsorships_settings' );
 		?>
 		<input type="text" name="purecharity_sponsorships_settings[plugin_color]" id="main_color" value="<?php echo @$options['plugin_color']; ?>">
-		<?php
-	}
-
-	/**
-	 * Renders the brading image uploader/url.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function branding_image_render(  ) {
-		$options = get_option( 'purecharity_sponsorships_settings' );
-		?>
-		<label for="upload_image">
-			<input id="branding_image" type="text" size="36"
-				name="purecharity_sponsorships_settings[branding_image]" value="<?php echo @$options['branding_image']; ?>" />
-			<input id="upload_image_button" type="button" value="Upload Image" />
-			<br />Enter an URL or upload an image for the branding image.
-		</label>
 		<?php
 	}
 
