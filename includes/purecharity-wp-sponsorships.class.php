@@ -249,7 +249,7 @@ class Purecharity_Wp_Sponsorships {
 
 		$options = get_option( 'purecharity_sponsorships_settings' );
 
-		if(isset($_GET['child_id']) && isset($options['single_view_template']) && $options['single_view_template'] != ''){
+		if(isset($_GET['sponsorship']) && isset($options['single_view_template']) && $options['single_view_template'] != ''){
 			add_action('template_redirect', 'ss_force_template');
 		}
 

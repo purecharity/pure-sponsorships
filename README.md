@@ -32,7 +32,7 @@ Possible parameters:
 `[sponsorship_child]`
 
 Possible parameters:
-* `child_id` - The id of the child to show
+* `sponsorship` - The id of the child to show
 
 ### Sponsorship Program
 `[sponsorship id=X]`
