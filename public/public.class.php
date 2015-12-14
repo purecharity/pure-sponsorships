@@ -146,7 +146,7 @@ class Purecharity_Wp_Sponsorships_Public {
 		foreach(self::$sponsorships->sponsorships as $sponsorship){
 			$html .= '
 				<div class="pcsponsor-item sponsorship_'.$sponsorship->id.'">
-					<a href="?child_id='.$sponsorship->id.'">
+					<a href="?sponsorship='.$sponsorship->id.'">
 						<div class="pcsponsor-image" style="background-image: url('.$sponsorship->images->small.');">
 							'. ($sponsorship->is_sponsored ? '<p class="pcsponsor-full">Fully Sponsored</p>' : '') .'
 						</div>

@@ -77,9 +77,9 @@ class Purecharity_Wp_Sponsorships_Shortcode {
 
     $sponsorship_id = $atts["program_id"];
 
-    if (isset($_GET['child_id'])) {
+    if (isset($_GET['sponsorship'])) {
       // In case it's a single child view
-      return self::sponsorship_child_shortcode(array('child_id' => $_GET['child_id']));
+      return self::sponsorship_child_shortcode(array('sponsorship' => $_GET['sponsorship']));
     } else if($sponsorship_id){
       $filters = '';
       $age = '';
@@ -164,11 +164,11 @@ class Purecharity_Wp_Sponsorships_Shortcode {
   public static function sponsorship_child_shortcode($atts)
   {
     $options = shortcode_atts( array(
-      'child_id' => false
+      'sponsorship' => false
     ), $atts );
 
-    if ($options['child_id']) {
-      $sponsorship = self::$base_plugin->api_call('sponsorships/'. $options['child_id']);
+    if ($options['sponsorship']) {
+      $sponsorship = self::$base_plugin->api_call('sponsorships/'. $options['sponsorship']);
 
       Purecharity_Wp_Sponsorships_Public::$sponsorship = $sponsorship->sponsorship;
 

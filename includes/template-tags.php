@@ -23,8 +23,8 @@ function pc_sponsorships($program_slug){
  *
  * @since    1.3
  */
-function pc_sponsorship($child_id){
-  return pc_base()->api_call('sponsorships/' . $child_id);
+function pc_sponsorship($sponsorship){
+  return pc_base()->api_call('sponsorships/' . $sponsorship);
 }
 
 
