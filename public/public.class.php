@@ -469,11 +469,9 @@ class Purecharity_Wp_Sponsorships_Public {
 		$custom_fields = Array();
 		foreach($fields_config as $key => $value){
 			$parts = explode('|', $value);
-			$custom_fields[$parts[0]] = $parts[1];
+			$custom_fields[$parts[0]] = @$parts[1];
 		}
 
-		// var_dump(self::$sponsorship->custom_fields);
-		// exit;
 
 		$html = '';
 		foreach($custom_fields as $key => $value){
