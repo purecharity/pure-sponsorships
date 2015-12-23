@@ -206,7 +206,7 @@ class Purecharity_Wp_Sponsorships_Admin {
 				<li class="custom_field">
 
 					<div class="left">
-						<b><?php echo $parsed_field[1]; ?></b>
+						<b><?php echo @$parsed_field[1]; ?></b>
 						<input type="text" value="<?php echo $parsed_field[1]; ?>">
 						<a href="#" class="edit">edit</a>
 						<a href="#" class="save">save</a>
