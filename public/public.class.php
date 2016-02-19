@@ -187,8 +187,8 @@ class Purecharity_Wp_Sponsorships_Public {
 							'. self::sponsorship_slots_text() .'
 						</div>
 						<h1>'.self::$sponsorship->name.'</h1>
-						<p class="pure-desc">'. self::$sponsorship->description .'</p>
-						'.self::render_about_section('pure-desc').'
+						<p class="pure-text">'. self::$sponsorship->description .'</p>
+						'.self::render_about_section('pure-text').'
 						'.self::render_custom_fields().'
 					</div>
 
