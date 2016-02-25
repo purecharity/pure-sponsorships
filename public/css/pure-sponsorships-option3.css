@@ -151,12 +151,11 @@ ul.pcsponsor-single-status-buttons li {
 }
 .pcs-rounded .info p {
 	float:left;
-	color: orange;
 	clear: both;
 	margin-right: 30px;
 	font-size: 14px;
 }
-.pcs-rounded .info p.pure-desc {
+.pcs-rounded .info p.pure-text {
 	font-size: 20px;
 	color: initial;
 }

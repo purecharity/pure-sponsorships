@@ -3,6 +3,9 @@ fieldset.sp-livefilter {
   border:none;
 }
 
+.pure-desc { font-size: 1.4em !important; }
+.pure-about { font-size: 1em !important; }
+
 .sp-filtering {
   float: right;
   width: 100%;

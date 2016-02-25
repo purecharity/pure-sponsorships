@@ -188,6 +188,7 @@ class Purecharity_Wp_Sponsorships_Public {
 						</div>
 						<h1>'.self::$sponsorship->name.'</h1>
 						<p class="pure-desc">'. self::$sponsorship->description .'</p>
+						'.self::render_about_section('pure-about').'
 						'.self::render_custom_fields().'
 					</div>
 
@@ -239,7 +240,8 @@ class Purecharity_Wp_Sponsorships_Public {
 							'. self::sponsorship_slots_text() .'
 						</div>
 						<div class="pcsponsor-single-desc">
-							<p>'.self::$sponsorship->description.'</p>
+							<p class="pure-desc">'.self::$sponsorship->description.'</p>
+							'.self::render_about_section('pure-about').'
 							<p>'.self::render_custom_fields().'</p>
 						</div>
 						<div class="pcsponsor-single-select">
@@ -251,6 +253,19 @@ class Purecharity_Wp_Sponsorships_Public {
 
   	$html .= Purecharity_Wp_Base_Public::powered_by();
 
+		return $html;
+	}
+
+	/**
+	 * Renders the about optional section.
+	 *
+	 * @since    1.4
+	 */
+	public static function render_about_section($class=''){
+		$html = '';
+		if(isset(self::$sponsorship->about) && self::$sponsorship->about != ''){
+			$html = '<p class="'.$class.'">'.self::$sponsorship->about.'</p>';
+		}
 		return $html;
 	}
 
