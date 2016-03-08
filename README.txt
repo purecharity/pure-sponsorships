@@ -30,6 +30,9 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 1.4.1 =
+* Added age display
+
 = 1.4 =
 * Added new about optional field
 
