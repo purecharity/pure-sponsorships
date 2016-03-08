@@ -118,7 +118,7 @@ class Purecharity_Wp_Sponsorships_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts() { 
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/public.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script('pure-sponsorships-selects-js', plugin_dir_url( __FILE__ ) . 'js/jquery.simpleselect.js', $this->version, false );
@@ -187,6 +187,12 @@ class Purecharity_Wp_Sponsorships_Public {
 							'. self::sponsorship_slots_text() .'
 						</div>
 						<h1>'.self::$sponsorship->name.'</h1>
+						<p class="pure-desc">
+							'. self::$sponsorship->description .'
+							<small>
+								'.self::$sponsorship->age.'
+							</small>
+						</p>
 						<p class="pure-desc">'. self::$sponsorship->description .'</p>
 						'.self::render_about_section('pure-about').'
 						'.self::render_custom_fields().'
@@ -240,7 +246,12 @@ class Purecharity_Wp_Sponsorships_Public {
 							'. self::sponsorship_slots_text() .'
 						</div>
 						<div class="pcsponsor-single-desc">
-							<p class="pure-desc">'.self::$sponsorship->description.'</p>
+							<p class="pure-desc">
+								<small>
+									<strong>Age:</strong> '.self::$sponsorship->age.'
+								</small><br />
+								'.self::$sponsorship->description.'
+							</p>
 							'.self::render_about_section('pure-about').'
 							<p>'.self::render_custom_fields().'</p>
 						</div>
