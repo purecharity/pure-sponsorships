@@ -188,12 +188,9 @@ class Purecharity_Wp_Sponsorships_Public {
 						</div>
 						<h1>'.self::$sponsorship->name.'</h1>
 						<p class="pure-desc">
+							'.self::render_age().'
 							'. self::$sponsorship->description .'
-							<small>
-								'.self::$sponsorship->age.'
-							</small>
 						</p>
-						<p class="pure-desc">'. self::$sponsorship->description .'</p>
 						'.self::render_about_section('pure-about').'
 						'.self::render_custom_fields().'
 					</div>
@@ -247,9 +244,7 @@ class Purecharity_Wp_Sponsorships_Public {
 						</div>
 						<div class="pcsponsor-single-desc">
 							<p class="pure-desc">
-								<small>
-									<strong>Age:</strong> '.self::$sponsorship->age.'
-								</small><br />
+								'.self::render_age().'
 								'.self::$sponsorship->description.'
 							</p>
 							'.self::render_about_section('pure-about').'
@@ -266,6 +261,23 @@ class Purecharity_Wp_Sponsorships_Public {
 
 		return $html;
 	}
+
+	
+	/**
+	 * Renders the age display.
+	 *
+	 * @since    1.4.1
+	 */
+	public static function render_age(){
+		$html = '';
+		if(isset(self::$sponsorship->age) && self::$sponsorship->age != ''){
+			$html = '	<small>
+							<strong>Age:</strong> '.self::$sponsorship->age.'
+						</small><br />';
+		}
+		return $html;
+	}
+
 
 	/**
 	 * Renders the about optional section.
