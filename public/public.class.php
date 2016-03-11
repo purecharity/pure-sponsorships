@@ -118,7 +118,7 @@ class Purecharity_Wp_Sponsorships_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts() { 
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/public.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script('pure-sponsorships-selects-js', plugin_dir_url( __FILE__ ) . 'js/jquery.simpleselect.js', $this->version, false );
@@ -252,7 +252,6 @@ class Purecharity_Wp_Sponsorships_Public {
 		return $html;
 	}
 
-
 	/**
 	 * Renders slots.
 	 *
@@ -310,8 +309,6 @@ class Purecharity_Wp_Sponsorships_Public {
 		return $html;
 	}
 
-
->>>>>>> Stashed changes
 	/**
 	 * Renders the about optional section.
 	 *
