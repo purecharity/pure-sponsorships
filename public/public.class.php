@@ -270,7 +270,7 @@ class Purecharity_Wp_Sponsorships_Public {
 	 */
 	public static function render_age(){
 		$html = '';
-		if(isset(self::$sponsorship->age) && self::$sponsorship->age != ''){
+		if(!empty(self::$sponsorship->age)){
 			$html = '	<small>
 							<strong>Age:</strong> '.self::$sponsorship->age.'
 						</small><br />';
@@ -286,7 +286,7 @@ class Purecharity_Wp_Sponsorships_Public {
 	 */
 	public static function render_about_section($class=''){
 		$html = '';
-		if(isset(self::$sponsorship->about) && self::$sponsorship->about != ''){
+		if(!empty(self::$sponsorship->about)){
 			$html = '<p class="'.$class.'">'.self::$sponsorship->about.'</p>';
 		}
 		return $html;
