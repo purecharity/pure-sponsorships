@@ -118,7 +118,7 @@ class Purecharity_Wp_Sponsorships_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() { 
+	public function enqueue_scripts() {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/public.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script('pure-sponsorships-selects-js', plugin_dir_url( __FILE__ ) . 'js/jquery.simpleselect.js', $this->version, false );
@@ -266,14 +266,14 @@ class Purecharity_Wp_Sponsorships_Public {
 		if((int)$total_available > 1){
 			if($template == 0){
 				$html .= '<div class="slots">
-										<ul class="no-padding">'.self::the_bullets(self::$sponsorship).'</ul>
-										'. self::sponsorship_slots_text() .'
-									</div>';
+						    <ul class="no-padding">'.self::the_bullets(self::$sponsorship).'</ul>
+							'. self::sponsorship_slots_text() .'
+						  </div>';
 			}else{
 				$html .= '<ul class="pcsponsor-status-buttons pcsponsor-single-status-buttons">
-										'.self::the_bullets(self::$sponsorship).'
-									</ul>
-									'. self::sponsorship_slots_text();
+                           '.self::the_bullets(self::$sponsorship).'
+                          </ul>
+							'. self::sponsorship_slots_text();
 			}
 		}
 		return $html;
@@ -303,8 +303,8 @@ class Purecharity_Wp_Sponsorships_Public {
 		$html = '';
 		if(!empty(self::$sponsorship->age)){
 			$html = '<p class="pure-desc"><small>
-							<strong>Age:</strong> '.self::$sponsorship->age.'
-						</small></p>';
+                       <strong>Age:</strong> '.self::$sponsorship->age.'
+					  </small></p>';
 		}
 		return $html;
 	}
@@ -338,10 +338,10 @@ class Purecharity_Wp_Sponsorships_Public {
 		if((int)$total_available > 1){
 			$components['bullets'] = '<ul class="pcsponsor-status-buttons">'.self::the_bullets($sponsorship).'</ul>';
 			$components['info'] = '<p class="pcsponsor-status">
-														 	'.$available.' of '.$total_available.'
-														 	'.pluralize($total_available, 'Sponsorship').'
-														 	Available
-														 </p>';
+								    '.$available.' of '.$total_available.'
+									'.pluralize($total_available, 'Sponsorship').'
+                                    Available
+                                   </p>';
 		}else{
 			$components['bullets'] = '';
 			$components['info'] = (($sponsorship->is_sponsored && (isset($options['plugin_style']) && $options['plugin_style'] == 'pure-sponsorships-option3')) ? '<p>Sponsored</p>' : '');
