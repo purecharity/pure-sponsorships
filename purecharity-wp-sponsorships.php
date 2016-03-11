@@ -16,7 +16,11 @@
  * Plugin Name:       Pure Charity Sponsorships
  * Plugin URI:        http://purecharity.com/
  * Description:       Plugin to display a list of or a single sponsorship program from the Pure Charity app.
+<<<<<<< Updated upstream
  * Version:           1.4
+=======
+ * Version:           1.4.2
+>>>>>>> Stashed changes
  * Author:            Pure Charity
  * Author URI:        http://purecharity.com/
  * License:           GPL-2.0+

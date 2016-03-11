@@ -182,12 +182,14 @@ class Purecharity_Wp_Sponsorships_Public {
 				<div class="pcs-rounded">
 
 					<div class="info">
-						<div class="slots">
-							<ul class="no-padding">'.self::the_bullets(self::$sponsorship).'</ul>
-							'. self::sponsorship_slots_text() .'
-						</div>
+						'.self::render_slots(0).'
 						<h1>'.self::$sponsorship->name.'</h1>
+<<<<<<< Updated upstream
 						<p class="pure-desc">'. self::$sponsorship->description .'</p>
+=======
+						'.self::render_age().'
+						'.self::render_description().'
+>>>>>>> Stashed changes
 						'.self::render_about_section('pure-about').'
 						'.self::render_custom_fields().'
 					</div>
@@ -234,13 +236,15 @@ class Purecharity_Wp_Sponsorships_Public {
 					<div class="pcsponsor-single-content">
 						<div class="pcsponsor-single-info">
 							<h4>'.self::$sponsorship->name.'</h4>
-							<ul class="pcsponsor-status-buttons pcsponsor-single-status-buttons">
-								'.self::the_bullets(self::$sponsorship).'
-							</ul>
-							'. self::sponsorship_slots_text() .'
+							'.self::render_slots(1).'
 						</div>
 						<div class="pcsponsor-single-desc">
+<<<<<<< Updated upstream
 							<p class="pure-desc">'.self::$sponsorship->description.'</p>
+=======
+							'.self::render_age().'
+							'.self::render_description().'
+>>>>>>> Stashed changes
 							'.self::render_about_section('pure-about').'
 							<p>'.self::render_custom_fields().'</p>
 						</div>
@@ -256,6 +260,68 @@ class Purecharity_Wp_Sponsorships_Public {
 		return $html;
 	}
 
+<<<<<<< Updated upstream
+=======
+
+	/**
+	 * Renders slots.
+	 *
+	 * @since    1.4.2
+	 */
+	public static function render_slots($template=0){
+		$total_available = self::$sponsorship->sponsors_goal;
+		$taken = self::$sponsorship->quantity_taken;
+		if((int)$taken > (int)$total_available){ $taken = $total_available; }
+
+		$html = '';
+		if((int)$total_available > 1){
+			if($template == 0){
+				$html .= '<div class="slots">
+										<ul class="no-padding">'.self::the_bullets(self::$sponsorship).'</ul>
+										'. self::sponsorship_slots_text() .'
+									</div>';
+			}else{
+				$html .= '<ul class="pcsponsor-status-buttons pcsponsor-single-status-buttons">
+										'.self::the_bullets(self::$sponsorship).'
+									</ul>
+									'. self::sponsorship_slots_text();
+			}
+		}
+		return $html;
+	}
+
+	/**
+	 * Renders the description.
+	 *
+	 * @since    1.4.2
+	 */
+	public static function render_description(){
+		$html = '';
+		if(!empty(self::$sponsorship->description)){
+			$html = '<p class="pure-desc">
+								'.self::$sponsorship->description.'
+							</p>';
+		}
+		return $html;
+	}
+
+	/**
+	 * Renders the age display.
+	 *
+	 * @since    1.4.1
+	 */
+	public static function render_age(){
+		$html = '';
+		if(!empty(self::$sponsorship->age)){
+			$html = '<p class="pure-desc"><small>
+							<strong>Age:</strong> '.self::$sponsorship->age.'
+						</small></p>';
+		}
+		return $html;
+	}
+
+
+>>>>>>> Stashed changes
 	/**
 	 * Renders the about optional section.
 	 *
