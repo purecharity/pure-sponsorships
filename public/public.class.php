@@ -338,8 +338,8 @@ class Purecharity_Wp_Sponsorships_Public {
 		if((int)$total_available > 1){
 			$components['bullets'] = '<ul class="pcsponsor-status-buttons">'.self::the_bullets($sponsorship).'</ul>';
 			$components['info'] = '<p class="pcsponsor-status">
-								    '.$available.' of '.$total_available.'
-									'.pluralize($total_available, 'Sponsorship').'
+                                    '.$available.' of '.$total_available.'
+                                    '.pluralize($total_available, 'Sponsorship').'
                                     Available
                                    </p>';
 		}else{
