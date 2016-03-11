@@ -184,12 +184,8 @@ class Purecharity_Wp_Sponsorships_Public {
 					<div class="info">
 						'.self::render_slots(0).'
 						<h1>'.self::$sponsorship->name.'</h1>
-<<<<<<< Updated upstream
-						<p class="pure-desc">'. self::$sponsorship->description .'</p>
-=======
 						'.self::render_age().'
 						'.self::render_description().'
->>>>>>> Stashed changes
 						'.self::render_about_section('pure-about').'
 						'.self::render_custom_fields().'
 					</div>
@@ -239,12 +235,8 @@ class Purecharity_Wp_Sponsorships_Public {
 							'.self::render_slots(1).'
 						</div>
 						<div class="pcsponsor-single-desc">
-<<<<<<< Updated upstream
-							<p class="pure-desc">'.self::$sponsorship->description.'</p>
-=======
 							'.self::render_age().'
 							'.self::render_description().'
->>>>>>> Stashed changes
 							'.self::render_about_section('pure-about').'
 							<p>'.self::render_custom_fields().'</p>
 						</div>
@@ -260,8 +252,6 @@ class Purecharity_Wp_Sponsorships_Public {
 		return $html;
 	}
 
-<<<<<<< Updated upstream
-=======
 
 	/**
 	 * Renders slots.
