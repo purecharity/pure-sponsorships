@@ -14,8 +14,8 @@
  *
  * @since    1.3
  */
-function pc_sponsorships($program_slug){
-  return pc_base()->api_call('sponsorships?sponsorship_program_id=' . $program_slug);
+function pc_sponsorships($program_slug, $limit=9999){
+  return pc_base()->api_call('sponsorships?sponsorship_program_id=' . $program_slug . '&limit=' . $limit);
 }
 
 /**
