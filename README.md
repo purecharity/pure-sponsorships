@@ -27,6 +27,7 @@ Possible parameters:
 * `program_id` - (Required) The id of the program to show
 * `per_page` - The amount of records to fetch per page
 * `reject` - (1,2,3) List of IDs of sponsorships to reject on the listing
+* `status` - (available | reserved) To list only available or funded slots
 
 ### Single Child
 `[sponsorship_child]`
