@@ -70,6 +70,7 @@ class Purecharity_Wp_Sponsorships_Shortcode {
 
     // Set up and retrieve attributes
     $options = shortcode_atts( array(
+      'status' => false,
       'per_page' => false,
       'reject' => false
     ), $atts );
@@ -130,9 +131,9 @@ class Purecharity_Wp_Sponsorships_Shortcode {
         $filters .= '&reject='.$options['reject'];
       }
 
-      $full_filters = $filters;
-      $full_filters .= '&limit='. 9999;
-
+      if ($status = $options['status']) {
+        $filters .= '&status='. $status;
+      }
 
       if (isset($_GET['_page'])) {
         $filters .= '&page='. (int) $_GET['_page'];
@@ -141,6 +142,9 @@ class Purecharity_Wp_Sponsorships_Shortcode {
       if ($limit = $options['per_page']) {
         $filters .= '&limit='. (int) $limit;
       }
+
+      $full_filters = $filters;
+      $full_filters .= '&limit='. 9999;
 
       // Grab the sponsorships
       $sponsorships = self::$base_plugin->api_call('sponsorships?sponsorship_program_id='. $sponsorship_id . $filters);
