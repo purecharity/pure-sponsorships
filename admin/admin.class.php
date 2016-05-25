@@ -163,13 +163,25 @@ class Purecharity_Wp_Sponsorships_Admin {
 		);
 
 		add_settings_field(
-			'back_link', __( 'Display Back Link', 'wordpress' ),
+			'show_back_link', __( 'Display Back Link', 'wordpress' ),
+			array('Purecharity_Wp_Sponsorships_Admin', 'show_back_link_render'),
+			'psPluginPage', 'purecharity_sponsorships_3_psPluginPage_section'
+		);
+
+		add_settings_field(
+			'back_link', __( 'Back Link to (default: back)', 'wordpress' ),
 			array('Purecharity_Wp_Sponsorships_Admin', 'back_link_render'),
 			'psPluginPage', 'purecharity_sponsorships_3_psPluginPage_section'
 		);
 
 		add_settings_field(
-			'more_link', __( 'Display More Info Link', 'wordpress' ),
+			'show_more_link', __( 'Display More Info Link', 'wordpress' ),
+			array('Purecharity_Wp_Sponsorships_Admin', 'show_more_link_render'),
+			'psPluginPage', 'purecharity_sponsorships_3_psPluginPage_section'
+		);
+
+		add_settings_field(
+			'more_link', __( 'More Info Link to', 'wordpress' ),
 			array('Purecharity_Wp_Sponsorships_Admin', 'more_link_render'),
 			'psPluginPage', 'purecharity_sponsorships_3_psPluginPage_section'
 		);
@@ -207,14 +219,14 @@ class Purecharity_Wp_Sponsorships_Admin {
 
 					<div class="left">
 						<b><?php echo @$parsed_field[1]; ?></b>
-						<input type="text" value="<?php echo $parsed_field[1]; ?>">
+						<input type="text" value="<?php echo @$parsed_field[1]; ?>">
 						<a href="#" class="edit">edit</a>
 						<a href="#" class="save">save</a>
 					</div>
 
 					<div class="right">
-						<b><?php echo $parsed_field[0]; ?></b>
-						<input type="text" value="<?php echo $parsed_field[0]; ?>">
+						<b><?php echo @$parsed_field[0]; ?></b>
+						<input type="text" value="<?php echo @$parsed_field[0]; ?>">
 						<a href="#" class="edit">edit</a>
 						<a href="#" class="save">save</a>
 					</div>
@@ -334,12 +346,12 @@ class Purecharity_Wp_Sponsorships_Admin {
 	 *
 	 * @since    1.1
 	 */
-	public static function back_link_render(  ) {
+	public static function show_back_link_render(  ) {
 		$options = get_option( 'purecharity_sponsorships_settings' );
 		?>
 		<input
 			type="checkbox"
-			name="purecharity_sponsorships_settings[back_link]"
+			name="purecharity_sponsorships_settings[show_back_link]"
 			<?php echo $options['plugin_style'] == 'pure-sponsorships-option3' ? '' : 'disabled' ?>
 			<?php echo (isset($options['back_link'])) ? 'checked' : '' ?>
 			value="true">
@@ -347,19 +359,51 @@ class Purecharity_Wp_Sponsorships_Admin {
 	}
 
 	/**
+	 * Renders the back link option.
+	 *
+	 * @since    1.5
+	 */
+	public static function back_link_render(  ) {
+		$options = get_option( 'purecharity_sponsorships_settings' );
+		?>
+		<input
+			type="text"
+			name="purecharity_sponsorships_settings[back_link]"
+			placeholder="javascript:history.go(-1)"
+			value="<?php echo @$options['back_link']; ?>" />
+		<?php
+	}
+
+
+	/**
 	 * Renders the more info link.
 	 *
 	 * @since    1.1
+	 */
+	public static function show_more_link_render(  ) {
+		$options = get_option( 'purecharity_sponsorships_settings' );
+		?>
+		<input
+			type="checkbox"
+			name="purecharity_sponsorships_settings[show_more_link]"
+			<?php echo $options['plugin_style'] == 'pure-sponsorships-option3' ? '' : 'disabled' ?>
+			<?php echo (isset($options['more_link'])) ? 'checked' : '' ?>
+			value="true">
+		<?php
+	}
+
+	/**
+	 * Renders the more link option.
+	 *
+	 * @since    1.5
 	 */
 	public static function more_link_render(  ) {
 		$options = get_option( 'purecharity_sponsorships_settings' );
 		?>
 		<input
-			type="checkbox"
+			type="text"
 			name="purecharity_sponsorships_settings[more_link]"
-			<?php echo $options['plugin_style'] == 'pure-sponsorships-option3' ? '' : 'disabled' ?>
-			<?php echo (isset($options['more_link'])) ? 'checked' : '' ?>
-			value="true">
+			value="<?php echo @$options['more_link']; ?>" />
 		<?php
 	}
 
@@ -506,7 +550,6 @@ class Purecharity_Wp_Sponsorships_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script('jquery-ui-sortable');
-		wp_enqueue_script( 'admin-uploader', plugins_url( 'admin/js/uploader-script.js' , dirname(__FILE__) ) );
     wp_enqueue_script('media-upload');
     wp_enqueue_script('thickbox');
 	}

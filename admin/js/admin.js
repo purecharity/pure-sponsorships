@@ -1,5 +1,99 @@
+// Back/more links
+function toggle_link_fields(){
+  var show_back_link = $('input[name="purecharity_sponsorships_settings[back_link]"]');
+  var show_more_link = $('input[name="purecharity_sponsorships_settings[more_link]"]');
+  
+  if($(show_back_link).is(':checked')){
+    $(show_back_link).parents('tr').next().show();
+  }else{
+    $(show_back_link).parents('tr').next().hide();
+  }
+
+  if($(show_more_link).is(':checked')){
+    $(show_more_link).parents('tr').next().show();
+  }else{
+    $(show_more_link).parents('tr').next().hide();
+  }
+}
+
+
+// Custom Fields manager
+function save_custom_fields(){
+  var custom_fields = Array();
+  $('li.custom_field').each(function(){
+    custom_fields.push($(this).find('.right b:first').text()+'|'+$(this).find('.left b:first').text())
+  })
+  $('#custom_fields_value').val(custom_fields.join(';'))
+  return false;
+}
+
+// Check if a field already exists
+function field_exists(key){
+  var exists = false;
+  $('.custom_field').each(function(){
+    if($(this).find('.right b:first').text() == key){
+      exists = true;
+      return exists;
+    }
+  })
+  return exists;
+}
+
+// Add a new example custom field
+function new_example_custom_field(original, display){
+  var html = '<li class="custom_field">'
+      + '<div class="left">'
+      + '<b>'+display+'</b>'
+      + '<input type="text" value="'+display+'">'
+      + ' <a href="#" class="edit">edit</a>'
+      + ' <a href="#" class="save">save</a>'
+      + '</div>'
+      + '<div class="right">'
+      + '<b>'+original+'</b>'
+      + '<input type="text" value="'+original+'">'
+      + ' <a href="#" class="edit">edit</a>'
+      + ' <a href="#" class="save">save</a>'
+      + '</div>'
+      + '<div class="options">'
+      + '<a href="#" class="remove">remove</a>'
+      + '</div>'
+      + '<br style="clear:both" />'
+      + '</li>';
+  $('ul.pcs_custom_field:last').append(html);
+}
+
+// Add a new custom field
+function new_custom_field(){
+  var html = '<li class="custom_field">'
+      + '<div class="left">'
+      + '<b>Display Value</b>'
+      + '<input type="text" value="Display Value">'
+      + ' <a href="#" class="edit">edit</a>'
+      + ' <a href="#" class="save">save</a>'
+      + '</div>'
+      + '<div class="right">'
+      + '<b>CustomFieldIdentifier</b>'
+      + '<input type="text" value="CustomFieldIdentifier">'
+      + ' <a href="#" class="edit">edit</a>'
+      + ' <a href="#" class="save">save</a>'
+      + '</div>'
+      + '<div class="options">'
+      + '<a href="#" class="remove">remove</a>'
+      + '</div>'
+      + '<br style="clear:both" />'
+      + '</li>';
+  $('ul.pcs_custom_field:last').append(html);
+}
+
 jQuery(function($) {
   $(document).ready(function(){
+
+    /* Show/hide back and more link options */
+    toggle_link_fields(); // Initialize
+    $(document).on('change', 'input[name="purecharity_sponsorships_settings[more_link]"],input[name="purecharity_sponsorships_settings[back_link]"]', function(){
+      toggle_link_fields();
+    })
+    /* Show/hide back and more link options */
 
     /* Custom Fields Sortable Config */
     $( ".sortable" ).sortable({
@@ -12,11 +106,11 @@ jQuery(function($) {
 
     $(document).on('change', 'input[name="purecharity_sponsorships_settings[plugin_style]"]', function(){
       if($(this).val() == 'pure-sponsorships-option3'){
-        $('input[name="purecharity_sponsorships_settings[back_link]"]').attr({ disabled: false })
-        $('input[name="purecharity_sponsorships_settings[more_link]"]').attr({ disabled: false })
+        $('input[name="purecharity_sponsorships_settings[show_back_link]"]').attr({ disabled: false })
+        $('input[name="purecharity_sponsorships_settings[show_more_link]"]').attr({ disabled: false })
       }else{
-        $('input[name="purecharity_sponsorships_settings[back_link]"]').attr({ disabled: true })
-        $('input[name="purecharity_sponsorships_settings[more_link]"]').attr({ disabled: true })
+        $('input[name="purecharity_sponsorships_settings[show_back_link]"]').attr({ disabled: true })
+        $('input[name="purecharity_sponsorships_settings[show_more_link]"]').attr({ disabled: true })
       }
     })
 
@@ -106,74 +200,6 @@ jQuery(function($) {
   				$('#generate-example').text('Load Example');
   			}
       });
-    })
-  })
-
-  // Custom Fields manager
-  function save_custom_fields(){
-    var custom_fields = Array();
-    $('li.custom_field').each(function(){
-      custom_fields.push($(this).find('.right b:first').text()+'|'+$(this).find('.left b:first').text())
-    })
-    $('#custom_fields_value').val(custom_fields.join(';'))
-    return false;
-  }
-
-  // Check if a field already exists
-  function field_exists(key){
-  	var exists = false;
-  	$('.custom_field').each(function(){
-  		if($(this).find('.right b:first').text() == key){
-  			exists = true;
-  			return exists;
-  		}
-  	})
-  	return exists;
-  }
-
-  // Add a new example custom field
-  function new_example_custom_field(original, display){
-    var html = '<li class="custom_field">'
-        + '<div class="left">'
-        + '<b>'+display+'</b>'
-        + '<input type="text" value="'+display+'">'
-        + ' <a href="#" class="edit">edit</a>'
-        + ' <a href="#" class="save">save</a>'
-        + '</div>'
-        + '<div class="right">'
-        + '<b>'+original+'</b>'
-        + '<input type="text" value="'+original+'">'
-        + ' <a href="#" class="edit">edit</a>'
-        + ' <a href="#" class="save">save</a>'
-        + '</div>'
-        + '<div class="options">'
-        + '<a href="#" class="remove">remove</a>'
-        + '</div>'
-        + '<br style="clear:both" />'
-        + '</li>';
-    $('ul.pcs_custom_field:last').append(html);
-  }
-
-  // Add a new custom field
-  function new_custom_field(){
-    var html = '<li class="custom_field">'
-        + '<div class="left">'
-        + '<b>Display Value</b>'
-        + '<input type="text" value="Display Value">'
-        + ' <a href="#" class="edit">edit</a>'
-        + ' <a href="#" class="save">save</a>'
-        + '</div>'
-        + '<div class="right">'
-        + '<b>CustomFieldIdentifier</b>'
-        + '<input type="text" value="CustomFieldIdentifier">'
-        + ' <a href="#" class="edit">edit</a>'
-        + ' <a href="#" class="save">save</a>'
-        + '</div>'
-        + '<div class="options">'
-        + '<a href="#" class="remove">remove</a>'
-        + '</div>'
-        + '<br style="clear:both" />'
-        + '</li>';
-    $('ul.pcs_custom_field:last').append(html);
-  }
+    });
+  });
 });
