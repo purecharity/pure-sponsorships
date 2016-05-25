@@ -514,13 +514,16 @@ class Purecharity_Wp_Sponsorships_Public {
 	 */
     public static function lower_links(){
         $options = get_option( 'purecharity_sponsorships_settings' );
-
+        $back_link = isset($options['back_link']) ? $options['back_link'] : 'javascript:history.go(-1);';
+        echo "<pre>";
+        var_dump($options);
+        exit;
         $html = '';
-        if(isset($options['back_link'])){
-            $html .= '<a href="#" class="back"><span> < </span> Back to all kids</a>';
+        if(isset($options['show_back_link'])){
+            $html .= '<a href="'. $back_link .'" class="back"><span> < </span> Back to all kids</a>';
         }
-        if(isset($options['more_link'])){
-            $html .= '<a href="#" class="learn-more">Learn more about sponsorships <span> > </span></a>';
+        if(isset($options['show_more_link']) && !empty($options['more_link'])){
+            $html .= '<a href="'. $options['more_link'] .'" class="learn-more">Learn more about sponsorships <span> > </span></a>';
         }
 
         return $html;
