@@ -515,9 +515,6 @@ class Purecharity_Wp_Sponsorships_Public {
     public static function lower_links(){
         $options = get_option( 'purecharity_sponsorships_settings' );
         $back_link = isset($options['back_link']) ? $options['back_link'] : 'javascript:history.go(-1);';
-        echo "<pre>";
-        var_dump($options);
-        exit;
         $html = '';
         if(isset($options['show_back_link'])){
             $html .= '<a href="'. $back_link .'" class="back"><span> < </span> Back to all kids</a>';
