@@ -1,18 +1,18 @@
 // Back/more links
 function toggle_link_fields(){
-  var show_back_link = $('input[name="purecharity_sponsorships_settings[back_link]"]');
-  var show_more_link = $('input[name="purecharity_sponsorships_settings[more_link]"]');
+  var show_back_link = jQuery('input[name="purecharity_sponsorships_settings[back_link]"]');
+  var show_more_link = jQuery('input[name="purecharity_sponsorships_settings[more_link]"]');
   
-  if($(show_back_link).is(':checked')){
-    $(show_back_link).parents('tr').next().show();
+  if(jQuery(show_back_link).is(':checked')){
+    jQuery(show_back_link).parents('tr').next().show();
   }else{
-    $(show_back_link).parents('tr').next().hide();
+    jQuery(show_back_link).parents('tr').next().hide();
   }
 
-  if($(show_more_link).is(':checked')){
-    $(show_more_link).parents('tr').next().show();
+  if(jQuery(show_more_link).is(':checked')){
+    jQuery(show_more_link).parents('tr').next().show();
   }else{
-    $(show_more_link).parents('tr').next().hide();
+    jQuery(show_more_link).parents('tr').next().hide();
   }
 }
 
@@ -20,18 +20,18 @@ function toggle_link_fields(){
 // Custom Fields manager
 function save_custom_fields(){
   var custom_fields = Array();
-  $('li.custom_field').each(function(){
-    custom_fields.push($(this).find('.right b:first').text()+'|'+$(this).find('.left b:first').text())
+  jQuery('li.custom_field').each(function(){
+    custom_fields.push(jQuery(this).find('.right b:first').text()+'|'+jQuery(this).find('.left b:first').text())
   })
-  $('#custom_fields_value').val(custom_fields.join(';'))
+  jQuery('#custom_fields_value').val(custom_fields.join(';'))
   return false;
 }
 
 // Check if a field already exists
 function field_exists(key){
   var exists = false;
-  $('.custom_field').each(function(){
-    if($(this).find('.right b:first').text() == key){
+  jQuery('.custom_field').each(function(){
+    if(jQuery(this).find('.right b:first').text() == key){
       exists = true;
       return exists;
     }
@@ -59,7 +59,7 @@ function new_example_custom_field(original, display){
       + '</div>'
       + '<br style="clear:both" />'
       + '</li>';
-  $('ul.pcs_custom_field:last').append(html);
+  jQuery('ul.pcs_custom_field:last').append(html);
 }
 
 // Add a new custom field
@@ -82,103 +82,103 @@ function new_custom_field(){
       + '</div>'
       + '<br style="clear:both" />'
       + '</li>';
-  $('ul.pcs_custom_field:last').append(html);
+  jQuery('ul.pcs_custom_field:last').append(html);
 }
 
-jQuery(function($) {
-  $(document).ready(function(){
+jQuery(function(jQuery) {
+  jQuery(document).ready(function(){
 
     /* Show/hide back and more link options */
     toggle_link_fields(); // Initialize
-    $(document).on('change', 'input[name="purecharity_sponsorships_settings[more_link]"],input[name="purecharity_sponsorships_settings[back_link]"]', function(){
+    jQuery(document).on('change', 'input[name="purecharity_sponsorships_settings[more_link]"],input[name="purecharity_sponsorships_settings[back_link]"]', function(){
       toggle_link_fields();
     })
     /* Show/hide back and more link options */
 
     /* Custom Fields Sortable Config */
-    $( ".sortable" ).sortable({
+    jQuery( ".sortable" ).sortable({
       stop: function(){
         save_custom_fields();
       },
       axis: 'Y'
     });
-    $( ".sortable" ).disableSelection();
+    jQuery( ".sortable" ).disableSelection();
 
-    $(document).on('change', 'input[name="purecharity_sponsorships_settings[plugin_style]"]', function(){
-      if($(this).val() == 'pure-sponsorships-option3'){
-        $('input[name="purecharity_sponsorships_settings[show_back_link]"]').attr({ disabled: false })
-        $('input[name="purecharity_sponsorships_settings[show_more_link]"]').attr({ disabled: false })
+    jQuery(document).on('change', 'input[name="purecharity_sponsorships_settings[plugin_style]"]', function(){
+      if(jQuery(this).val() == 'pure-sponsorships-option3'){
+        jQuery('input[name="purecharity_sponsorships_settings[show_back_link]"]').attr({ disabled: false })
+        jQuery('input[name="purecharity_sponsorships_settings[show_more_link]"]').attr({ disabled: false })
       }else{
-        $('input[name="purecharity_sponsorships_settings[show_back_link]"]').attr({ disabled: true })
-        $('input[name="purecharity_sponsorships_settings[show_more_link]"]').attr({ disabled: true })
+        jQuery('input[name="purecharity_sponsorships_settings[show_back_link]"]').attr({ disabled: true })
+        jQuery('input[name="purecharity_sponsorships_settings[show_more_link]"]').attr({ disabled: true })
       }
     })
 
     // For editing of each field
-    $(document).on('click', '.custom_field a.edit', function(){
-      $(this).hide();
-      $(this).parent().find('b').hide();
-      $(this).parent().find('input').show();
-      $(this).parent().find('.save').show();
+    jQuery(document).on('click', '.custom_field a.edit', function(){
+      jQuery(this).hide();
+      jQuery(this).parent().find('b').hide();
+      jQuery(this).parent().find('input').show();
+      jQuery(this).parent().find('.save').show();
       return false;
     })
-    $(document).on('click', '.custom_field a.save', function(){
-      var text = $(this).parent().find('input').val();
+    jQuery(document).on('click', '.custom_field a.save', function(){
+      var text = jQuery(this).parent().find('input').val();
       if(text == ''){ alert("Value can't be empty."); return false; }
-      $(this).hide();
-      $(this).parent().find('b').show().text(text);
-      $(this).parent().find('input').hide();
-      $(this).parent().find('.edit').show();
+      jQuery(this).hide();
+      jQuery(this).parent().find('b').show().text(text);
+      jQuery(this).parent().find('input').hide();
+      jQuery(this).parent().find('.edit').show();
       save_custom_fields();
       return false;
     })
 
     // Prevents enter tu submit the form
-    $(document).on('keydown', '.custom_field input', function(event){
+    jQuery(document).on('keydown', '.custom_field input', function(event){
       if(event.keyCode == 13) {
         event.preventDefault();
-        $(this).parent().find('.save').click();
+        jQuery(this).parent().find('.save').click();
         return false;
       }
     })
-    $(document).on('keydown', '#example-program-slug', function(event){
+    jQuery(document).on('keydown', '#example-program-slug', function(event){
       if(event.keyCode == 13) {
         event.preventDefault();
-        $(this).next().click();
+        jQuery(this).next().click();
         return false;
       }
     })
 
     // Remove an item
-    $(document).on('click', '.custom_field .remove', function(event){
+    jQuery(document).on('click', '.custom_field .remove', function(event){
       if(confirm("Are you sure you want to remove this field?")){
-        $(this).parents('li').remove();
+        jQuery(this).parents('li').remove();
         save_custom_fields();
       }
       return false;
     })
     /* Custom Fields Sortable Config */
 
-    $('#custom-fields-example').on('click', function(){
-      $(this).hide()
-      $('#custom-fields-example-cancel').show()
-      $('#custom-fields-loader').show()
+    jQuery('#custom-fields-example').on('click', function(){
+      jQuery(this).hide()
+      jQuery('#custom-fields-example-cancel').show()
+      jQuery('#custom-fields-loader').show()
       return false;
     })
-    $('#custom-fields-example-cancel').on('click', function(){
-      $(this).hide()
-      $('#custom-fields-example').show()
-      $('#custom-fields-loader').hide()
+    jQuery('#custom-fields-example-cancel').on('click', function(){
+      jQuery(this).hide()
+      jQuery('#custom-fields-example').show()
+      jQuery('#custom-fields-loader').hide()
       return false;
     })
 
-    $('#generate-example').on('click', function(){
-      $('#generate-example').text('Loading...');
-      var slug = $('#example-program-slug').val()
+    jQuery('#generate-example').on('click', function(){
+      jQuery('#generate-example').text('Loading...');
+      var slug = jQuery('#example-program-slug').val()
 
-      $.ajax({
+      jQuery.ajax({
         type: 'GET',
-        url: $(this).parent().attr('data-api-url')+slug,
+        url: jQuery(this).parent().attr('data-api-url')+slug,
         success: function(data){
   	      parsed_data = JSON.parse(data.custom_fields);
 
@@ -197,7 +197,7 @@ jQuery(function($) {
   			},
         error: function(e){ console.log(e) },
   			complete: function(data){
-  				$('#generate-example').text('Load Example');
+  				jQuery('#generate-example').text('Load Example');
   			}
       });
     });
