@@ -14,6 +14,8 @@ It depends on the Pure Charity Base Plugin being installed and it's credentials 
 
 ## Installation
 
+IMPORTANT:  At this time the plugin requires a name change after extracting from Github.  After downloading the source code from Github unzip the files and rename the folder **/purecharity-wp-sponsorships** and compress as **purecharity-wp-sponsorships.zip** if you plan to use the Wordpress plugin installer via upload.   
+
 1. Copy the `/purecharity-wp-sponsorships` folder to the `/wp-content/plugins` on your WP install
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. You're done!
