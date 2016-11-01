@@ -42,3 +42,29 @@ Possible parameters:
 
 Possible parameters:
 * `id` - The sponsorship id
+
+## Template Tags
+
+### Sponsorships List
+
+> Returns JSON information for the program requested
+
+Function:
+`pc_sponsorships($program_slug, $limit=9999, $status='public')`
+
+Parameters:
+
+`$program_slug`: The program's slug
+`$limit`: Amount of sponsorships to pull
+`$status`: Status of the sponsorships
+
+### Sponsorships Info
+
+> Returns JSON information for the program requested
+
+Function:
+`pc_sponsorship($slug)`
+
+Parameters:
+
+`$slug`: The sponsorship's slug
