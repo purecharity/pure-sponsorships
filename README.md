@@ -56,7 +56,7 @@ Parameters:
 
 `$program_slug`: The program's slug
 `$limit`: Amount of sponsorships to pull
-`$status`: Status of the sponsorships
+`$status`: (public|available|visible|reserved) Default: Public. Status of the sponsorships
 
 ### Sponsorships Info
 
