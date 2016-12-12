@@ -65,100 +65,111 @@ class Purecharity_Wp_Sponsorships_Shortcode {
    *
    * @since    1.0.0
    */
-  public static function sponsorships_shortcode($atts)
-  {
+    public static function sponsorships_shortcode( $atts ) {
+        // Set up and retrieve attributes
+        $options = shortcode_atts( array(
+            'status'    => false,
+            'per_page'  => false,
+            'reject'    => false
+        ), $atts );
 
-    // Set up and retrieve attributes
-    $options = shortcode_atts( array(
-      'status' => false,
-      'per_page' => false,
-      'reject' => false
-    ), $atts );
+        $sponsorship_id = $atts["program_id"];
+        $partner_slug = $atts["field_partner_slug"];
 
+        if ( isset( $_GET['sponsorship'] ) ) {
+            // In case it's a single child view
+            return self::sponsorship_child_shortcode( array( 'sponsorship' => $_GET['sponsorship'] ) );
+        } else if( $sponsorship_id ) {
+            $filters = '';
+            $age = '';
+            $gender = '';
+            $location = '';
 
-    $sponsorship_id = $atts["program_id"];
+            // Check for any filters, validating and sanitizing along the way
+            // Append valid filters to $filters
+            if( isset( $_GET['gender'] ) ) {
+                $gender = ucfirst( strtolower( $_GET['gender'] ) );
 
-    if (isset($_GET['sponsorship'])) {
-      // In case it's a single child view
-      return self::sponsorship_child_shortcode(array('sponsorship' => $_GET['sponsorship']));
-    } else if($sponsorship_id){
-      $filters = '';
-      $age = '';
-      $gender = '';
-      $location = '';
+                if( $gender == 'Male' || $gender == 'Female' ) {
+                    $filters = '&gender='. $gender;
+                }
+            }
 
-      // Check for any filters, validating and sanitizing along the way
-      // Append valid filters to $filters
-      if (isset($_GET['gender'])) {
-        $gender = ucfirst(strtolower($_GET['gender']));
+            $range1 = $range2 = $range3 = $range4 = '';
 
-        if ($gender == 'Male' || $gender == 'Female') {
-          $filters = '&gender='. $gender;
+            if( isset( $_GET['age'] ) ) {
+                $age = $_GET['age'];
+                if( preg_match( '/[0-9-]*/', $_GET['age'] ) ) {
+                    // Split the age
+                    $ages = explode( '-', $_GET['age'] );
+                    if( isset( $ages[0] ) && isset( $ages[1] ) ) {
+                        $filters .= '&min_age=' . $ages[0];
+                    }
+
+                    if( isset( $ages[0] ) && ! isset( $ages[1] ) ) {
+                        $filters .= '&max_age=' . $ages[0];
+                    }
+
+                    if( isset( $ages[1] ) ) {
+                        $filters .= '&max_age=' . $ages[1];
+                    }
+                }
+            }
+
+            if( isset( $_GET['country'] ) ) {
+                $filters .= '&country=' . urlencode( sanitize_text_field( $_GET['country'] ) );
+            }
+
+            if( isset( $_GET['query'] ) ) {
+                $filters .= '&search_filter=' . urlencode( sanitize_text_field( $_GET['query'] ) );
+            }
+
+            if( $options['reject'] ) {
+                $filters .= '&reject=' . $options['reject'];
+            }
+
+            if ( $status = $options['status'] ) {
+                $filters .= '&status=' . $status;
+            }
+
+            if ( isset( $_GET['_page'] ) ) {
+                $filters .= '&page=' . (int) $_GET['_page'];
+            }
+
+            if ( $limit = $options['per_page'] ) {
+                $filters .= '&limit=' . (int) $limit;
+            }
+
+            $full_filters = $filters;
+            $full_filters .= '&limit=' . 9999;
+
+            // Grab the sponsorships
+            $sponsorships = self::$base_plugin->api_call( 'sponsorships?sponsorship_program_id=' . $sponsorship_id . $filters );
+            $sponsorships_full = self::$base_plugin->api_call( 'sponsorships?sponsorship_program_id=' . $sponsorship_id . $full_filters );
+            
+            // Set up the page url for filtering
+            $pageUrl = explode( '?', $_SERVER['REQUEST_URI'], 2 );
+            $pageUrl = $pageUrl[0];
+            
+            if( isset( $partner_slug ) && $partner_slug != '') {
+                foreach( $sponsorships->sponsorships as $k => $item ) {
+                    if( $item->field_partner_slug != $partner_slug ) {
+                        unset( $sponsorships->sponsorships[$k] );
+                    }
+                }
+                
+                foreach( $sponsorships_full->sponsorships as $k => $item ) {
+                    if( $item->field_partner_slug != $partner_slug ) {
+                        unset( $sponsorships_full->sponsorships[$k] );
+                    }
+                }
+            }
+
+            Purecharity_Wp_Sponsorships_Public::$sponsorships = $sponsorships;
+            Purecharity_Wp_Sponsorships_Public::$sponsorships_full = $sponsorships_full;
+            return Purecharity_Wp_Sponsorships_Public::listing();
         }
-      }
-
-      $range1 = $range2 = $range3 = $range4 = '';
-
-      if (isset($_GET['age'])) {
-        $age = $_GET['age'];
-        if (preg_match('/[0-9-]*/', $_GET['age'])) {
-          // Split the age
-          $ages = explode('-', $_GET['age']);
-
-          if (isset($ages[0]) && isset($ages[1])) {
-            $filters .= '&min_age='. $ages[0];
-          }
-
-          if (isset($ages[0]) && !isset($ages[1])) {
-            $filters .= '&max_age='. $ages[0];
-          }
-
-          if (isset($ages[1])) {
-            $filters .= '&max_age='. $ages[1];
-          }
-        }
-      }
-
-      if (isset($_GET['country'])) {
-        $filters .= '&country='. urlencode(sanitize_text_field($_GET['country']));;
-      }
-
-      if (isset($_GET['query'])) {
-        $filters .= '&search_filter='. urlencode(sanitize_text_field($_GET['query']));;
-      }
-
-      if($options['reject']){
-        $filters .= '&reject='.$options['reject'];
-      }
-
-      if ($status = $options['status']) {
-        $filters .= '&status='. $status;
-      }
-
-      if (isset($_GET['_page'])) {
-        $filters .= '&page='. (int) $_GET['_page'];
-      }
-
-      if ($limit = $options['per_page']) {
-        $filters .= '&limit='. (int) $limit;
-      }
-
-      $full_filters = $filters;
-      $full_filters .= '&limit='. 9999;
-
-      // Grab the sponsorships
-      $sponsorships = self::$base_plugin->api_call('sponsorships?sponsorship_program_id='. $sponsorship_id . $filters);
-      $sponsorships_full = self::$base_plugin->api_call('sponsorships?sponsorship_program_id='. $sponsorship_id . $full_filters);
-
-      // Set up the page url for filtering
-      $pageUrl = explode('?', $_SERVER['REQUEST_URI'], 2);
-      $pageUrl = $pageUrl[0];
-
-      Purecharity_Wp_Sponsorships_Public::$sponsorships = $sponsorships;
-      Purecharity_Wp_Sponsorships_Public::$sponsorships_full = $sponsorships_full;
-      return Purecharity_Wp_Sponsorships_Public::listing();
     }
-  }
 
   /**
    * Sponsorships child view shortcode.
