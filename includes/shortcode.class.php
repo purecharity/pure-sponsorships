@@ -74,7 +74,7 @@ class Purecharity_Wp_Sponsorships_Shortcode {
         ), $atts );
 
         $sponsorship_id = $atts["program_id"];
-        $partner_slug = $atts["partner_slug"];
+        $partner_slug = $atts["field_partner_slug"];
 
         if ( isset( $_GET['sponsorship'] ) ) {
             // In case it's a single child view
