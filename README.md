@@ -63,8 +63,8 @@ Parameters:
 > Returns JSON information for the program requested
 
 Function:
-`pc_sponsorship($slug)`
+`pc_sponsorship($id)`
 
 Parameters:
 
-`$slug`: The sponsorship's slug
+`$id`: The sponsorship's ID
