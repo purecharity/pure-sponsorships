@@ -512,19 +512,24 @@ class Purecharity_Wp_Sponsorships_Public {
 	 *
 	 * @since    1.1
 	 */
-    public static function lower_links(){
-        $options = get_option( 'purecharity_sponsorships_settings' );
-        $back_link = isset($options['back_link']) ? $options['back_link'] : 'javascript:history.go(-1);';
-        $html = '';
-        if(isset($options['show_back_link'])){
-            $html .= '<a href="'. $back_link .'" class="back"><span> < </span> Back to all kids</a>';
-        }
-        if(isset($options['show_more_link']) && !empty($options['more_link'])){
-            $html .= '<a href="'. $options['more_link'] .'" class="learn-more">Learn more about sponsorships <span> > </span></a>';
-        }
+   public static function lower_links(){
+       $options = get_option( 'purecharity_sponsorships_settings' );
+       $go_back = htmlspecialchars($_SERVER['HTTP_REFERER']);
 
-        return $html;
-    }
+
+       $html = '';
+       if(isset($options['show_back_link'])){
+       $html .= '<a href="'. $go_back .'" class="back"><span> < </span>Back to all kids</a>';
+
+         }
+
+       if(isset($options['show_more_link']) && !empty($options['more_link'])){
+           $html .= '<a href="'. $options['more_link'] .'" class="learn-more">Learn more about sponsorships <span> > </span></a>';
+       }
+
+
+       return $html;
+   }
 
     /**
 	 * Renders the custom fields for the single kid view.
