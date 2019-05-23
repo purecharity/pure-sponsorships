@@ -519,7 +519,7 @@ class Purecharity_Wp_Sponsorships_Public {
 
        $html = '';
        if(isset($options['show_back_link'])){
-       $html .= '<a href="'. $go_back .'" class="back"><span> < </span>Back to all kids</a>';
+       $html .= '<a href="'. $go_back .'" class="back"><span> < </span>Back</a>';
 
          }
 
