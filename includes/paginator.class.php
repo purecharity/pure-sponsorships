@@ -28,7 +28,14 @@ class Purecharity_Wp_Sponsorships_Paginator {
    * @since    1.0.0
    */
   public static function page_links($meta = array(), $options = array()){
-    $query = $_GET['query'];
+
+    foreach ($_GET as $key => $value) {
+      if($key == 'age' || $key == 'gender' || $key == 'location' || $key == 'query'){
+        $query_params .= '&'. $key . '=' . $value ;
+
+      }
+    }
+
     if((int)$meta->num_pages == 1){
       return '';
     }
@@ -37,20 +44,21 @@ class Purecharity_Wp_Sponsorships_Paginator {
     $html = '<div class="pc_pagination">';
     $html .= '<ul class="pc_page-numbers">';
 
+
     if($meta->current_page > 1){
-      $html .= '<li><a class="pc_page-numbers" href="?_page='.($meta->current_page-1).'&query='.($query).'">Previous</a></li>';
+      $html .= '<li><a class="pc_page-numbers" href="?_page='.($meta->current_page-1).$query_params.'">Previous</a></li>';
     }
 
     for($i = 1; $i <= $meta->num_pages; $i++){
       if($meta->current_page == $i){
         $html .= '<li><span class="pc_page-numbers current">'.$i.'</span></li>';
       }else{
-        $html .= '<li><a class="pc_page-numbers" href="?_page='.$i.'&query='.($query).'">'.$i.'</a></li>';
+        $html .= '<li><a class="pc_page-numbers" href="?_page='.$i.$query_params.'">'.$i.'</a></li>';
       }
     }
 
     if($meta->current_page < $meta->num_pages){
-      $html .= '<li><a class="pc_page-numbers" href="?_page='.($meta->current_page+1).'&query='.($query).'">Next</a></li>';
+      $html .= '<li><a class="pc_page-numbers" href="?_page='.($meta->current_page+1).$query_params.'">Next</a></li>';
     }
 
     $html .= '</ul>';
