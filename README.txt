@@ -30,6 +30,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 1.7 =
+* Add query to paginator
+
+
 = 1.5 =
 * Back and More link on layout 3 are now customizable
 
@@ -55,7 +59,7 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 * Parameter name change
 
 = 1.3 =
-* Added template tags  
+* Added template tags
 
 = 1.2 =
 * Added custom template option
