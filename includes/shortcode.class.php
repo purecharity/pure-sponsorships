@@ -76,7 +76,7 @@ class Purecharity_Wp_Sponsorships_Shortcode {
     ), $atts );
 
 
-    $sponsorship_id = $atts["program_id"];
+    $sponsorship_id = (string) $atts["program_id"];
 
     if (isset($_GET['sponsorship'])) {
       // In case it's a single child view
