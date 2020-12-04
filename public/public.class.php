@@ -143,7 +143,9 @@ class Purecharity_Wp_Sponsorships_Public {
         $html .= self::location_filter();
         $html .= '</div>';
 
-        foreach(self::$sponsorships->sponsorships as $sponsorship){
+        $programSponsorships = (array) self::$sponsorships->sponsorships;
+        foreach($programSponsorships as $sponsorship){
+            (array) $sponsorship;
             $html .= '
                 <div class="pcsponsor-item sponsorship_'.$sponsorship->id.'">
                     <a href="?sponsorship='.$sponsorship->id.'">
@@ -399,7 +401,9 @@ class Purecharity_Wp_Sponsorships_Public {
             $html = "";
             // Grab the locations for the filter
             $locations = array();
-            foreach (self::$sponsorships_full->sponsorships as $sponsorship) {
+            $programSponsorships_full = (array) self::$sponsorships_full->sponsorships;
+            foreach($programSponsorships_full as $sponsorship) {
+                (array) $sponsorship;
                 $locations[$sponsorship->location] = true;
             }
             asort($locations);
