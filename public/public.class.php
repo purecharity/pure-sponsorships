@@ -143,6 +143,7 @@ class Purecharity_Wp_Sponsorships_Public {
         $html .= self::location_filter();
         $html .= '</div>';
 
+        $html .= '<div class="pcsponsor-item-container">';
         foreach(self::$sponsorships->sponsorships as $sponsorship){
             $html .= '
                 <div class="pcsponsor-item sponsorship_'.$sponsorship->id.'">
@@ -157,6 +158,7 @@ class Purecharity_Wp_Sponsorships_Public {
                 </div>
             ';
         }
+        $html .= '</div>';
 
         $html .= '</div>';
         $html .= Purecharity_Wp_Sponsorships_Paginator::page_links(self::$sponsorships->meta);
@@ -367,7 +369,7 @@ class Purecharity_Wp_Sponsorships_Public {
                 <option '. ( (isset($_GET['age']) && $_GET['age'] == '0-4') ? 'selected' : '') .' value="0-4">0-4</option>
                 <option '. ( (isset($_GET['age']) && $_GET['age'] == '5-8') ? 'selected' : '') .' value="5-8">5-8</option>
                 <option '. ( (isset($_GET['age']) && $_GET['age'] == '9-12') ? 'selected' : '') .' value="9-12">9-12</option>
-                <option '. ( (isset($_GET['age']) && $_GET['age'] == '13-99') ? 'selected' : '') .' value="13-99">13+</option>
+                <option '. ( (isset($_GET['age']) && $_GET['age'] == '13') ? 'selected' : '') .' value="13">13+</option>
             </select>';
         }
     }
