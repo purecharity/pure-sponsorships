@@ -1,6 +1,77 @@
+.pcsponsor-item-container{
+    margin-left: 6.5%;
+}
+
+/*
+These re-center the content as the page is resized
+*/
+
+@media only screen and (max-width: 1342px) {
+    .pcsponsor-item-container{
+        margin-left: 5.5%;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .pcsponsor-item-container{
+        margin-left: 15.5%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .pcsponsor-item-container{
+        margin-left: 12.5%;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .pcsponsor-item-container{
+        margin-left: 9.5%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .pcsponsor-item-container{
+        margin-left: 20.5%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .pcsponsor-item-container{
+        margin-left: 17.5%; 
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    .pcsponsor-item-container{
+        margin-left: 14.5%;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .pcsponsor-item-container{
+        margin-left: 28.5%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .pcsponsor-item-container{
+        margin-left: 24.5%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .pcsponsor-item-container{
+        margin-left: 21.5%;
+    }
+}
+
+
 .pcsponsor-item {
 	width: 220px;
 	float: left;
+	text-align: left;
 	background: #f0f0f0;
 	position: relative;
 	margin-right: 2%;
